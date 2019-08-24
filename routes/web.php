@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('regnums', 'RegnumController');
 Route::resource('divisios', 'DivisioController');
 Route::resource('ordos', 'OrdoController');
+Route::resource('familias', 'FamiliaController');
 
 // using route::resource resulted in weird model binding to controller.
 // reverted to manually creating routes.

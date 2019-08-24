@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Familia;
+use App\Ordo;
 use Illuminate\Http\Request;
 
 class FamiliaController extends Controller
@@ -14,7 +15,7 @@ class FamiliaController extends Controller
      */
     public function index()
     {
-        //
+        return view("familias.index");
     }
 
     /**
@@ -24,7 +25,7 @@ class FamiliaController extends Controller
      */
     public function create()
     {
-        //
+        return view("familias.create");
     }
 
     /**
@@ -35,7 +36,15 @@ class FamiliaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:familias',
+            'ordo' => 'required|integer'
+        ]);
+
+        $ordo = Ordo::find($validatedData['ordo']);
+        $ordo->familias()->create($validatedData);
+
+        return redirect()->route('familias.index')->with('status', 'Added!');
     }
 
     /**
@@ -57,7 +66,7 @@ class FamiliaController extends Controller
      */
     public function edit(Familia $familia)
     {
-        //
+        return view("familias.edit")->with(['familia' => $familia]);
     }
 
     /**
@@ -69,7 +78,16 @@ class FamiliaController extends Controller
      */
     public function update(Request $request, Familia $familia)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:regnums',
+            'ordo' => 'required|integer'
+        ]);
+
+        $familia->ordo_id = $validatedData['ordo'];
+        $familia->name = $validatedData['name'];
+        $familia->save();
+
+        return redirect()->route('familias.index')->with('status', 'Updated!');
     }
 
     /**
@@ -80,6 +98,8 @@ class FamiliaController extends Controller
      */
     public function destroy(Familia $familia)
     {
-        //
+        $familia->delete();
+
+        return redirect()->route('familias.index')->with('status', 'Deleted!');
     }
 }

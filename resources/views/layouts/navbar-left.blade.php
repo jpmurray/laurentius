@@ -19,7 +19,7 @@
             <a class="dropdown-item" href="{{ route("ordos.index") }}">
             	Ordos
             </a>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="{{ route("familias.index") }}">
             	Familias
             </a>
             <a class="dropdown-item" href="#">
