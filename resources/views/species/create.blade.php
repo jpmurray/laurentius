@@ -14,7 +14,7 @@
                         <h5 class="card-title text-md-center">Taxonomy</h5>
 
                         <div class="form-group row">
-                            <label for="genus" class="col-md-3 col-form-label text-md-right">{{ __('Genus') }}</label>
+                            <label for="genus" class="col-md-3 col-form-label text-md-right">{{ __('Genus') }} *</label>
 
                             <div class="col-md-6">
                                 <select id="genus" class="custom-select @error('genus') is-invalid @enderror" name="genus">
@@ -32,7 +32,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-3 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-3 col-form-label text-md-right">{{ __('Name') }} *</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -46,7 +46,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="name_fr" class="col-md-3 col-form-label text-md-right">{{ __('Name (french)') }}</label>
+                            <label for="name_fr" class="col-md-3 col-form-label text-md-right">{{ __('Name (french)') }} *</label>
 
                             <div class="col-md-6">
                                 <input id="name_fr" type="text" class="form-control @error('name_fr') is-invalid @enderror" name="name_fr" value="{{ old('name_fr') }}" required autocomplete="name_fr" autofocus>
@@ -60,7 +60,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="name_en" class="col-md-3 col-form-label text-md-right">{{ __('Name (english)') }}</label>
+                            <label for="name_en" class="col-md-3 col-form-label text-md-right">{{ __('Name (english)') }} *</label>
 
                             <div class="col-md-6">
                                 <input id="name_en" type="text" class="form-control @error('name_en') is-invalid @enderror" name="name_en" value="{{ old('name_en') }}" required autocomplete="name_en" autofocus>
