@@ -10,7 +10,7 @@
             <a class="dropdown-item" href="{{ route("regnums.index") }}">
             	Regnums
             </a>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="{{ route("divisios.index") }}">
             	Divisios
             </a>
             <a class="dropdown-item" href="#">

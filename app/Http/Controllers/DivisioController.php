@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Divisio;
+use App\Regnum;
 use Illuminate\Http\Request;
 
 class DivisioController extends Controller
@@ -14,7 +15,7 @@ class DivisioController extends Controller
      */
     public function index()
     {
-        //
+        return view("divisios.index");
     }
 
     /**
@@ -24,7 +25,7 @@ class DivisioController extends Controller
      */
     public function create()
     {
-        //
+        return view("divisios.create");
     }
 
     /**
@@ -35,7 +36,15 @@ class DivisioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:regnums',
+            'regnum' => 'required|integer'
+        ]);
+
+        $regnum = Regnum::find($validatedData['regnum']);
+        $regnum->divisios()->create($validatedData);
+
+        return redirect()->route('divisios.index')->with('status', 'Added!');
     }
 
     /**
@@ -57,7 +66,7 @@ class DivisioController extends Controller
      */
     public function edit(Divisio $divisio)
     {
-        //
+        return view("divisios.edit")->with(['divisio' => $divisio]);
     }
 
     /**
@@ -69,7 +78,16 @@ class DivisioController extends Controller
      */
     public function update(Request $request, Divisio $divisio)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:regnums',
+            'regnum' => 'required|integer'
+        ]);
+
+        $divisio->regnum_id = $validatedData['regnum'];
+        $divisio->name = $validatedData['name'];
+        $divisio->save();
+
+        return redirect()->route('divisios.index')->with('status', 'Added!');
     }
 
     /**
@@ -80,6 +98,8 @@ class DivisioController extends Controller
      */
     public function destroy(Divisio $divisio)
     {
-        //
+        $divisio->delete();
+
+        return redirect()->route('divisios.index')->with('status', 'Deleted!');
     }
 }

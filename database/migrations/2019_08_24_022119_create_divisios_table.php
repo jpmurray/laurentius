@@ -16,6 +16,7 @@ class CreateDivisiosTable extends Migration
         Schema::create('divisios', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('regnum_id');
+            $table->string("name");
             $table->timestamps();
         });
     }
