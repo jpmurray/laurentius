@@ -29,9 +29,9 @@
 					      	<a href="{{ route('classes.edit', $classis) }}" class="btn btn-link btn-sm">Edit</a>
 
 					      	<a href="{{ route('classes.destroy', $classis) }}" class="btn btn-link btn-sm" onclick="event.preventDefault();
-                                 document.getElementById('delete-divisio-{{ $classis->id }}').submit();">Delete</a>
+                                 document.getElementById('delete-classes-{{ $classis->id }}').submit();">Delete</a>
 
-					      	<form id="delete-divisio-{{ $classis->id }}" action="{{ route('classes.destroy', $classis) }}" method="POST" style="display: none;">
+					      	<form id="delete-classes-{{ $classis->id }}" action="{{ route('classes.destroy', $classis) }}" method="POST" style="display: none;">
 			                    @csrf
 			                    @method('DELETE')
 			                </form>
