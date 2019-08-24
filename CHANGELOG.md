@@ -4,4 +4,4 @@
 
 - Added authentication mechanism, but closed any registration possibilities.
 - Can manage taxonomies (_regnum_, _divisios_, _classes_, _ordos_, _familias_, _genus_, _species_).
-- Can add additional informations to _species_: taxonomy, need / tolerance, architecture.
+- Can add additional informations to _species_: taxonomy, need / tolerance, architecture, functions.

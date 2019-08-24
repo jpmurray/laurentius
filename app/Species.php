@@ -12,14 +12,24 @@ class Species extends Model
     const SOIL = ['light', 'mid', 'heavy', 'aqua'];
     const SHAPES = ['tree', 'shrub', 'herbaceous', 'vine'];
     const ROOTS = ['bulb', 'fleshy', 'basal', 'fasciculated', 'lateral', 'rotating', 'rhizome', 'superficial', 'tuber'];
+    const WILDLIFE_USES = ['food', 'shelter'];
+    const POLLINATING_TYPES = ['specialist', 'generalist'];
+    const ECOLOGICAL_USES = ['riparian', 'slope', 'flood'];
 
-    protected $fillable = ['name', 'name_en', 'name_fr', 'hardiness_ca', 'sun', 'soil', 'water', 'ph_min', 'ph_max', 'shape', 'root', 'maturity_height_meters', 'maturity_width_meters'];
+    protected $fillable = ['name', 'name_en', 'name_fr', 'hardiness_ca', 'sun', 'soil', 'water', 'ph_min', 'ph_max', 'shape', 'root', 'maturity_height_meters', 'maturity_width_meters', 'nitrogen_fixer', 'nutrient_accumulator', 'ground_cover', 'hedge', 'wildlife_use', 'ecological_use', 'pollinating_type'];
 
     protected $casts = [
         'sun' => 'json',
         'soil' => 'json',
         'shape' => 'json',
         'root' => 'json',
+        'wildlife_use' => 'json',
+        'ecological_use' => 'json',
+        'pollinating_type' => 'json',
+        'nitrogen_fixer' => 'boolean',
+        'nutrient_accumulator' => 'boolean',
+        'ground_cover' => 'boolean',
+        'hedge' => 'boolean',
     ];
 
     public function genus()
