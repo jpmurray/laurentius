@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Genus;
 use App\Species;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class SpeciesController extends Controller
      */
     public function index()
     {
-        //
+        return view("species.index");
     }
 
     /**
@@ -24,7 +25,7 @@ class SpeciesController extends Controller
      */
     public function create()
     {
-        //
+        return view("species.create");
     }
 
     /**
@@ -35,7 +36,18 @@ class SpeciesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validatedData = $request->validate([
+            'name' => 'required|unique:familias',
+            'name_fr' => 'required',
+            'name_en' => 'required',
+            'genus' => 'required|integer'
+        ]);
+
+        $genus = Genus::find($validatedData['genus']);
+        $genus->species()->create($validatedData);
+
+        return redirect()->route('species.index')->with('status', 'Added!');
     }
 
     /**
@@ -57,7 +69,7 @@ class SpeciesController extends Controller
      */
     public function edit(Species $species)
     {
-        //
+        return view("species.edit")->with(['species' => $species]);
     }
 
     /**
@@ -69,7 +81,20 @@ class SpeciesController extends Controller
      */
     public function update(Request $request, Species $species)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:regnums',
+            'name_fr' => 'required',
+            'name_en' => 'required',
+            'genus' => 'required|integer'
+        ]);
+
+        $species->genus_id = $validatedData['genus'];
+        $species->name = $validatedData['name'];
+        $species->name_fr = $validatedData['name_fr'];
+        $species->name_en = $validatedData['name_en'];
+        $species->save();
+
+        return redirect()->route('species.index')->with('status', 'Updated!');
     }
 
     /**
@@ -80,6 +105,8 @@ class SpeciesController extends Controller
      */
     public function destroy(Species $species)
     {
-        //
+        $species->delete();
+
+        return redirect()->route('species.index')->with('status', 'Deleted!');
     }
 }

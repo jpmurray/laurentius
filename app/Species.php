@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Species extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'name_en', 'name_fr'];
 
     public function genus()
     {

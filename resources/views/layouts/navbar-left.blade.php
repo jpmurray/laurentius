@@ -22,10 +22,10 @@
             <a class="dropdown-item" href="{{ route("familias.index") }}">
             	Familias
             </a>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="{{ route("genera.index") }}">
             	Genera
             </a>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="{{ route("species.index") }}">
             	Species
             </a>
         </div>

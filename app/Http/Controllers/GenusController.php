@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Familia;
 use App\Genus;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class GenusController extends Controller
      */
     public function index()
     {
-        //
+        return view("genera.index");
     }
 
     /**
@@ -24,7 +25,7 @@ class GenusController extends Controller
      */
     public function create()
     {
-        //
+        return view("genera.create");
     }
 
     /**
@@ -35,7 +36,15 @@ class GenusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:familias',
+            'familia' => 'required|integer'
+        ]);
+
+        $familia = Familia::find($validatedData['familia']);
+        $familia->genera()->create($validatedData);
+
+        return redirect()->route('genera.index')->with('status', 'Added!');
     }
 
     /**
@@ -57,7 +66,7 @@ class GenusController extends Controller
      */
     public function edit(Genus $genus)
     {
-        //
+        return view("genera.edit")->with(['genus' => $genus]);
     }
 
     /**
@@ -69,7 +78,16 @@ class GenusController extends Controller
      */
     public function update(Request $request, Genus $genus)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:regnums',
+            'familia' => 'required|integer'
+        ]);
+
+        $genus->familia_id = $validatedData['familia'];
+        $genus->name = $validatedData['name'];
+        $genus->save();
+
+        return redirect()->route('genera.index')->with('status', 'Updated!');
     }
 
     /**
@@ -80,6 +98,8 @@ class GenusController extends Controller
      */
     public function destroy(Genus $genus)
     {
-        //
+        $genus->delete();
+
+        return redirect()->route('genera.index')->with('status', 'Deleted!');
     }
 }
