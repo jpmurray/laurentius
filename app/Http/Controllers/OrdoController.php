@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classis;
 use App\Ordo;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class OrdoController extends Controller
      */
     public function index()
     {
-        //
+        return view("ordos.index");
     }
 
     /**
@@ -24,7 +25,7 @@ class OrdoController extends Controller
      */
     public function create()
     {
-        //
+        return view("ordos.create");
     }
 
     /**
@@ -35,7 +36,15 @@ class OrdoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:regnums',
+            'classis' => 'required|integer'
+        ]);
+
+        $classis = Classis::find($validatedData['classis']);
+        $classis->ordos()->create($validatedData);
+
+        return redirect()->route('ordos.index')->with('status', 'Added!');
     }
 
     /**
@@ -57,7 +66,7 @@ class OrdoController extends Controller
      */
     public function edit(Ordo $ordo)
     {
-        //
+        return view("ordos.edit")->with(['ordo' => $ordo]);
     }
 
     /**
@@ -69,7 +78,16 @@ class OrdoController extends Controller
      */
     public function update(Request $request, Ordo $ordo)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:regnums',
+            'classis' => 'required|integer'
+        ]);
+
+        $ordo->classis_id = $validatedData['classis'];
+        $ordo->name = $validatedData['name'];
+        $ordo->save();
+
+        return redirect()->route('ordos.index')->with('status', 'Updated!');
     }
 
     /**
@@ -80,6 +98,8 @@ class OrdoController extends Controller
      */
     public function destroy(Ordo $ordo)
     {
-        //
+        $ordo->delete();
+
+        return redirect()->route('ordos.index')->with('status', 'Deleted!');
     }
 }
