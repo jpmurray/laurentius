@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Genus;
+use App\Rules\HardinessCa;
+use App\Rules\Soil;
+use App\Rules\Sun;
 use App\Species;
 use Illuminate\Http\Request;
 
@@ -41,7 +44,13 @@ class SpeciesController extends Controller
             'name' => 'required|unique:species',
             'name_fr' => 'required',
             'name_en' => 'required',
-            'genus' => 'required|integer'
+            'genus' => 'required|integer',
+            'hardiness_ca' => ['nullable', new HardinessCa],
+            'sun' => ['nullable', new Sun],
+            'soil' => ['nullable', new Soil],
+            'water' => 'digits_between:1,5|nullable',
+            'ph_min' => 'numeric|nullable',
+            'ph_max' => 'numeric|nullable',
         ]);
 
         $genus = Genus::find($validatedData['genus']);
@@ -81,20 +90,33 @@ class SpeciesController extends Controller
      */
     public function update(Request $request, Species $species)
     {
+
         $validatedData = $request->validate([
-            'name' => 'required|unique:species',
+            'name' => 'required',
             'name_fr' => 'required',
             'name_en' => 'required',
-            'genus' => 'required|integer'
+            'genus' => 'required|integer',
+            'hardiness_ca' => ['nullable', new HardinessCa],
+            'sun' => ['nullable', new Sun],
+            'soil' => ['nullable', new Soil],
+            'water' => 'digits_between:1,5|nullable',
+            'ph_min' => 'numeric|nullable',
+            'ph_max' => 'numeric|nullable',
         ]);
 
         $species->genus_id = $validatedData['genus'];
         $species->name = $validatedData['name'];
         $species->name_fr = $validatedData['name_fr'];
         $species->name_en = $validatedData['name_en'];
+        $species->hardiness_ca = $validatedData['hardiness_ca'] == "null" ? null : $validatedData['hardiness_ca'];
+        $species->sun = !isset($validatedData['sun']) ? null : $validatedData['sun'];
+        $species->soil = !isset($validatedData['soil']) ? null : $validatedData['soil'];
+        $species->water = !isset($validatedData['water']) ? null : $validatedData['water'];
+        $species->ph_min = $validatedData['ph_min'] == "null" ? null : $validatedData['ph_min'];
+        $species->ph_max = $validatedData['ph_max'] == "null" ? null : $validatedData['ph_max'];
         $species->save();
 
-        return redirect()->route('species.index')->with('status', 'Updated!');
+        return redirect()->route('species.edit', $species)->with('status', 'Updated!');
     }
 
     /**
