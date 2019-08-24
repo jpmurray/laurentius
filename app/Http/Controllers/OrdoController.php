@@ -37,7 +37,7 @@ class OrdoController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|unique:regnums',
+            'name' => 'required|unique:ordos',
             'classis' => 'required|integer'
         ]);
 
@@ -79,7 +79,7 @@ class OrdoController extends Controller
     public function update(Request $request, Ordo $ordo)
     {
         $validatedData = $request->validate([
-            'name' => 'required|unique:regnums',
+            'name' => 'required',
             'classis' => 'required|integer'
         ]);
 

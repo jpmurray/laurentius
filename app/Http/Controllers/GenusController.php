@@ -37,7 +37,7 @@ class GenusController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|unique:familias',
+            'name' => 'required|unique:genera',
             'familia' => 'required|integer'
         ]);
 
@@ -79,7 +79,7 @@ class GenusController extends Controller
     public function update(Request $request, Genus $genus)
     {
         $validatedData = $request->validate([
-            'name' => 'required|unique:regnums',
+            'name' => 'required',
             'familia' => 'required|integer'
         ]);
 

@@ -37,7 +37,7 @@ class ClassisController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|unique:regnums',
+            'name' => 'required|unique:classes',
             'divisio' => 'required|integer'
         ]);
 
@@ -79,7 +79,7 @@ class ClassisController extends Controller
     public function update(Request $request, Classis $classis)
     {
         $validatedData = $request->validate([
-            'name' => 'required|unique:regnums',
+            'name' => 'required',
             'divisio' => 'required|integer'
         ]);
 

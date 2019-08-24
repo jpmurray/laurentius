@@ -79,7 +79,7 @@ class FamiliaController extends Controller
     public function update(Request $request, Familia $familia)
     {
         $validatedData = $request->validate([
-            'name' => 'required|unique:regnums',
+            'name' => 'required',
             'ordo' => 'required|integer'
         ]);
 

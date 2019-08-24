@@ -37,7 +37,7 @@ class DivisioController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|unique:regnums',
+            'name' => 'required|unique:divisios',
             'regnum' => 'required|integer'
         ]);
 
@@ -79,7 +79,7 @@ class DivisioController extends Controller
     public function update(Request $request, Divisio $divisio)
     {
         $validatedData = $request->validate([
-            'name' => 'required|unique:regnums',
+            'name' => 'required',
             'regnum' => 'required|integer'
         ]);
 

@@ -38,7 +38,7 @@ class SpeciesController extends Controller
     {
 
         $validatedData = $request->validate([
-            'name' => 'required|unique:familias',
+            'name' => 'required|unique:species',
             'name_fr' => 'required',
             'name_en' => 'required',
             'genus' => 'required|integer'
@@ -82,7 +82,7 @@ class SpeciesController extends Controller
     public function update(Request $request, Species $species)
     {
         $validatedData = $request->validate([
-            'name' => 'required|unique:regnums',
+            'name' => 'required|unique:species',
             'name_fr' => 'required',
             'name_en' => 'required',
             'genus' => 'required|integer'
