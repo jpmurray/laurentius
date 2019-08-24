@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classis;
+use App\Divisio;
 use Illuminate\Http\Request;
 
 class ClassisController extends Controller
@@ -14,7 +15,7 @@ class ClassisController extends Controller
      */
     public function index()
     {
-        //
+        return view("classes.index");
     }
 
     /**
@@ -24,7 +25,7 @@ class ClassisController extends Controller
      */
     public function create()
     {
-        //
+        return view("classes.create");
     }
 
     /**
@@ -35,7 +36,15 @@ class ClassisController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:regnums',
+            'divisio' => 'required|integer'
+        ]);
+
+        $divisio = Divisio::find($validatedData['divisio']);
+        $divisio->classes()->create($validatedData);
+
+        return redirect()->route('classes.index')->with('status', 'Added!');
     }
 
     /**
@@ -57,7 +66,7 @@ class ClassisController extends Controller
      */
     public function edit(Classis $classis)
     {
-        //
+        return view("classes.edit")->with(['classis' => $classis]);
     }
 
     /**
@@ -69,7 +78,16 @@ class ClassisController extends Controller
      */
     public function update(Request $request, Classis $classis)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:regnums',
+            'divisio' => 'required|integer'
+        ]);
+
+        $classis->divisio_id = $validatedData['divisio'];
+        $classis->name = $validatedData['name'];
+        $classis->save();
+
+        return redirect()->route('classes.index')->with('status', 'Updated!');
     }
 
     /**
@@ -80,6 +98,8 @@ class ClassisController extends Controller
      */
     public function destroy(Classis $classis)
     {
-        //
+        $classis->delete();
+
+        return redirect()->route('classes.index')->with('status', 'Deleted!');
     }
 }
