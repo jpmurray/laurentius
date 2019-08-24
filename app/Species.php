@@ -10,12 +10,16 @@ class Species extends Model
     const SUN = ['full', 'partial', 'shade'];
     const WATER = [1, 2, 3, 4, 5];
     const SOIL = ['light', 'mid', 'heavy', 'aqua'];
+    const SHAPES = ['tree', 'shrub', 'herbaceous', 'vine'];
+    const ROOTS = ['bulb', 'fleshy', 'basal', 'fasciculated', 'lateral', 'rotating', 'rhizome', 'superficial', 'tuber'];
 
-    protected $fillable = ['name', 'name_en', 'name_fr', 'hardiness_ca', 'sun', 'soil', 'water', 'ph_min', 'ph_max'];
+    protected $fillable = ['name', 'name_en', 'name_fr', 'hardiness_ca', 'sun', 'soil', 'water', 'ph_min', 'ph_max', 'shape', 'root', 'maturity_height_meters', 'maturity_width_meters'];
 
     protected $casts = [
         'sun' => 'json',
         'soil' => 'json',
+        'shape' => 'json',
+        'root' => 'json',
     ];
 
     public function genus()
