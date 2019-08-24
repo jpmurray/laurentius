@@ -289,6 +289,149 @@
                         </div>
                     </div>
 
+                    <h5 class="card-title text-md-center">Functions</h5>
+
+                    <div class="form-group row">
+                        <label for="nitrogen_fixer" class="col-md-3 col-form-label text-md-right">{{ __('Nitrogen fixer') }}</label>
+
+                        <div class="col-md-6">
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="nitrogen_fixer" id="nitrogen_fixer_yes" value="1" @if(!is_null($species->nitrogen_fixer) && $species->nitrogen_fixer) CHECKED @endif>
+                              <label class="form-check-label" for="nitrogen_fixer_yes">Yes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="nitrogen_fixer" id="nitrogen_fixer_no" value="0" @if(!is_null($species->nitrogen_fixer) && !$species->nitrogen_fixer) CHECKED @endif>
+                              <label class="form-check-label" for="nitrogen_fixer_no">No</label>
+                            </div>
+
+                            @error('soil')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="nutrient_accumulator" class="col-md-3 col-form-label text-md-right">{{ __('Nutrients accumulator') }}</label>
+
+                        <div class="col-md-6">
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="nutrient_accumulator" id="nutrient_accumulator_yes" value="1" @if(!is_null($species->nutrient_accumulator) && $species->nutrient_accumulator) CHECKED @endif>
+                              <label class="form-check-label" for="nutrient_accumulator_yes">Yes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="nutrient_accumulator" id="nutrient_accumulator_no" value="0" @if(!is_null($species->nutrient_accumulator) && !$species->nutrient_accumulator) CHECKED @endif>
+                              <label class="form-check-label" for="nutrient_accumulator_no">No</label>
+                            </div>
+
+                            @error('soil')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="ground_cover" class="col-md-3 col-form-label text-md-right">{{ __('Ground cover') }}</label>
+
+                        <div class="col-md-6">
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="ground_cover" id="ground_cover_yes" value="1" @if(!is_null($species->ground_cover) && $species->ground_cover) CHECKED @endif>
+                              <label class="form-check-label" for="ground_cover_yes">Yes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="ground_cover" id="ground_cover_no" value="0" @if(!is_null($species->ground_cover) && !$species->ground_cover) CHECKED @endif>
+                              <label class="form-check-label" for="ground_cover_no">No</label>
+                            </div>
+
+                            @error('soil')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="hedge" class="col-md-3 col-form-label text-md-right">{{ __('Hedge') }}</label>
+
+                        <div class="col-md-6">
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="hedge" id="hedge_yes" value="1" @if(!is_null($species->hedge) && $species->hedge) CHECKED @endif>
+                              <label class="form-check-label" for="hedge_yes">Yes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="hedge" id="hedge_no" value="0" @if(!is_null($species->hedge) && !$species->hedge) CHECKED @endif>
+                              <label class="form-check-label" for="hedge_no">No</label>
+                            </div>
+
+                            @error('soil')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="wildlife_use" class="col-md-3 col-form-label text-md-right">{{ __('Wildlife uses') }}</label>
+
+                        <div class="col-md-6">
+                            @foreach(App\Species::WILDLIFE_USES as $key => $use)
+                            <div class="custom-control custom-switch">
+                              <input type="checkbox" class="custom-control-input" id="wildlife_use_{{ $use }}" name="wildlife_use[]" value="{{ $use }}" @if(!is_null($species->wildlife_use) && in_array($use, $species->wildlife_use)) CHECKED @endif>
+                              <label class="custom-control-label" for="wildlife_use_{{ $use }}">{{ ucfirst($use) }}</label>
+                            </div>
+                            @endforeach
+
+                            @error('wildlife_use')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="ecological_use" class="col-md-3 col-form-label text-md-right">{{ __('Ecological uses') }}</label>
+
+                        <div class="col-md-6">
+                            @foreach(App\Species::ECOLOGICAL_USES as $key => $use)
+                            <div class="custom-control custom-switch">
+                              <input type="checkbox" class="custom-control-input" id="ecological_use_{{ $use }}" name="ecological_use[]" value="{{ $use }}" @if(!is_null($species->ecological_use) && in_array($use, $species->ecological_use)) CHECKED @endif>
+                              <label class="custom-control-label" for="ecological_use_{{ $use }}">{{ ucfirst($use) }}</label>
+                            </div>
+                            @endforeach
+
+                            @error('ecological_use')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="pollinating_type" class="col-md-3 col-form-label text-md-right">{{ __('Pollinating type') }}</label>
+
+                        <div class="col-md-6">
+                            @foreach(App\Species::POLLINATING_TYPES as $key => $type)
+                            <div class="custom-control custom-switch">
+                              <input type="checkbox" class="custom-control-input" id="pollinating_type_{{ $type }}" name="pollinating_type[]" value="{{ $type }}" @if(!is_null($species->pollinating_type) && in_array($type, $species->pollinating_type)) CHECKED @endif>
+                              <label class="custom-control-label" for="pollinating_type_{{ $type }}">{{ ucfirst($type) }}</label>
+                            </div>
+                            @endforeach
+
+                            @error('pollinating_type')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
                     <div class="card-footer">
                         <button type="submit" class="btn btn-sm btn-primary">
                             {{ __('Update') }}

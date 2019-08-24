@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Genus;
+use App\Rules\EcologicalUse;
 use App\Rules\HardinessCa;
+use App\Rules\PollinatingType;
 use App\Rules\Root;
 use App\Rules\Shape;
 use App\Rules\Soil;
 use App\Rules\Sun;
+use App\Rules\WildlifeUse;
 use App\Species;
 use Illuminate\Http\Request;
 
@@ -57,6 +60,13 @@ class SpeciesController extends Controller
             'root' => ['nullable', new Root],
             'maturity_width_meters' => 'numeric|nullable',
             'maturity_height_meters' => 'numeric|nullable',
+            'nitrogen_fixer' => 'nullable|boolean',
+            'nutrient_accumulator' => 'nullable|boolean',
+            'hedge' => 'nullable|boolean',
+            'ground_cover' => 'nullable|boolean',
+            'wildlife_use' => ['nullable', new WildlifeUse],
+            'ecological_use' => ['nullable', new EcologicalUse],
+            'pollinating_type' => ['nullable', new PollinatingType],
         ]);
 
         if ($validatedData['hardiness_ca'] == "null") {
@@ -116,6 +126,13 @@ class SpeciesController extends Controller
             'root' => ['nullable', new Root],
             'maturity_width_meters' => 'numeric|nullable',
             'maturity_height_meters' => 'numeric|nullable',
+            'nitrogen_fixer' => 'nullable|boolean',
+            'nutrient_accumulator' => 'nullable|boolean',
+            'hedge' => 'nullable|boolean',
+            'ground_cover' => 'nullable|boolean',
+            'wildlife_use' => ['nullable', new WildlifeUse],
+            'ecological_use' => ['nullable', new EcologicalUse],
+            'pollinating_type' => ['nullable', new PollinatingType],
         ]);
 
         $validatedData['sun'] = !isset($validatedData['sun']) ? null : $validatedData['sun'];
@@ -123,6 +140,10 @@ class SpeciesController extends Controller
         $validatedData['water'] = !isset($validatedData['water']) ? null : $validatedData['water'];
         $validatedData['shape'] = !isset($validatedData['shape']) ? null : $validatedData['shape'];
         $validatedData['root'] = !isset($validatedData['root']) ? null : $validatedData['root'];
+        $validatedData['wildlife_use'] = !isset($validatedData['wildlife_use']) ? null : $validatedData['wildlife_use'];
+        $validatedData['ecological_use'] = !isset($validatedData['ecological_use']) ? null : $validatedData['ecological_use'];
+        $validatedData['pollinating_type'] = !isset($validatedData['pollinating_type']) ? null : $validatedData['pollinating_type'];
+        
 
         $species->update($validatedData);
 
