@@ -15,6 +15,6 @@ class Divisio extends Model
 
     public function classes()
     {
-        return $this->hasMany(TaxClass::class);
+        return $this->hasMany(Classis::class);
     }
 }
