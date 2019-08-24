@@ -14,7 +14,7 @@ class RegnumController extends Controller
      */
     public function index()
     {
-        //
+        return view("regnums.index");
     }
 
     /**
@@ -24,7 +24,7 @@ class RegnumController extends Controller
      */
     public function create()
     {
-        //
+        return view("regnums.create");
     }
 
     /**
@@ -35,7 +35,13 @@ class RegnumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:regnums',
+        ]);
+
+        Regnum::create($validatedData);
+
+        return redirect()->route('regnums.index')->with('status', 'Added!');
     }
 
     /**
@@ -57,7 +63,7 @@ class RegnumController extends Controller
      */
     public function edit(Regnum $regnum)
     {
-        //
+        return view("regnums.edit")->with(['regnum' => $regnum]);
     }
 
     /**
@@ -69,7 +75,13 @@ class RegnumController extends Controller
      */
     public function update(Request $request, Regnum $regnum)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+        ]);
+
+        $regnum->update($validatedData);
+
+        return redirect()->route('regnums.edit', $regnum)->with('status', 'Updated!');
     }
 
     /**
@@ -80,6 +92,8 @@ class RegnumController extends Controller
      */
     public function destroy(Regnum $regnum)
     {
-        //
+        $regnum->delete();
+
+        return redirect()->route('regnums.index')->with('status', 'Deleted!');
     }
 }
