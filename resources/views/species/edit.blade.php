@@ -258,7 +258,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="maturity_height_meters" class="col-md-3 col-form-label text-md-right">{{ __('Hight, maturity (meters)') }}</label>
+                                <label for="maturity_height_meters" class="col-md-3 col-form-label text-md-right">{{ __('Height, maturity (meters)') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="maturity_height_meters" type="text" class="form-control @error('maturity_height_meters') is-invalid @enderror" name="maturity_height_meters" value="{{ $species->maturity_height_meters }}" autocomplete="maturity_height_meters" autofocus>

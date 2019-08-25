@@ -27,11 +27,11 @@
 			        </p>
 			        @if(!empty($species->interesting_cultivar))
 			        <p class="card-text">
-			        	<strong>Interesting cultivars:</strong> {{ implode(', ', $species->interesting_cultivar) }}
+			        	<strong>{{ __('Interesting cultivars:') }}</strong> {{ implode(', ', $species->interesting_cultivar) }}
 			        </p>
 			        @endif
 			        <p class="card-text">
-			        	<small class="text-muted">Dernière mise à jour: {{ $species->updated_at->tz("America/Montreal") }}</small>
+			        	<small class="text-muted">{{ __('Last updated:') }} {{ $species->updated_at->tz("America/Montreal") }}</small>
 			        </p>
 			      </div>
 			    </div>
@@ -41,35 +41,35 @@
 			<div class="card-deck mb-3">
 				<div class="card">
 				  <div class="card-header">
-				    Tolerance / Needs
+				    {{ __('Tolerance / Needs') }}
 				  </div>
 				  <div class="card-body">
-				    <p class="card-text"><strong>Hardiness Zone (CA)</strong>: {{ ucfirst($species->hardiness_ca) }}</p>
-				    <p class="card-text"><strong>Sun</strong>: {!! $species->sun_icon !!}</p>
-				    <p class="card-text"><strong>Water</strong>: {{ $species->water_icon }}<br><span class="text-muted">1 is low, 5 is high.</span></p>
-				    <p class="card-text"><strong>PH (min / max)</strong>: {{ $species->ph_min }} / {{ $species->ph_max }}</p>
-				    <p class="card-text"><strong>Soil</strong>: {!! $species->soil_icon !!}</p>
+				    <p class="card-text"><strong>{{ __('Hardiness Zone (CA)') }}</strong>: {{ ucfirst($species->hardiness_ca) }}</p>
+				    <p class="card-text"><strong>{{ __('Sun') }}</strong>: {!! $species->sun_icon !!}</p>
+				    <p class="card-text"><strong>{{ __('Water') }}</strong>: {{ $species->water_icon }}<br><span class="text-muted">{{ __('1 is low, 5 is high.') }}</span></p>
+				    <p class="card-text"><strong>{{ __('PH (min / max)') }}</strong>: {{ $species->ph_min }} / {{ $species->ph_max }}</p>
+				    <p class="card-text"><strong>{{ __('Soil') }}</strong>: {!! $species->soil_icon !!}</p>
 				  </div>
 				</div>
 
 				<div class="card">
 				  <div class="card-header">
-				    Architecture
+				    {{ __('Architecture') }}
 				  </div>
 				  <div class="card-body">
-				    <p class="card-text"><strong>Shape</strong>:
+				    <p class="card-text"><strong>{{ __('Shape') }}</strong>:
 				    	@foreach($species->shape as $shape)
-				    		{{ ucfirst($shape) }}
+				    		{{ ucfirst(__($shape)) }}
 				    		@if(!$loop->last && $loop->count != 1) , @endif
 				    	@endforeach
 				    </p>
-				    <p class="card-text"><strong>Root</strong>:
+				    <p class="card-text"><strong>{{ __('Root') }}</strong>:
 				    	@foreach($species->root as $root)
-				    		{{ ucfirst($root) }}
+				    		{{ ucfirst(__($root)) }}
 				    		@if(!$loop->last && $loop->count != 1) , @endif
 				    	@endforeach
 				    </p>
-				    <p class="card-text"><strong>Size at maturity (H x W)</strong>:
+				    <p class="card-text"><strong>{{ __('Size at maturity (H x W)') }}</strong>:
 				    	{{ $species->maturity_height_meters }}m x {{ $species->maturity_width_meters }}<main></main>
 				    </p>
 				  </div>
@@ -77,16 +77,16 @@
 
 				<div class="card">
 				  <div class="card-header">
-				    Uses
+				    {{ __('Uses') }}
 				  </div>
 				  <div class="card-body">
-				    <p class="card-text"><strong>Comestible</strong>:
+				    <p class="card-text"><strong>{{ __('Comestible') }}</strong>:
 				    	@foreach($species->comestible_use as $use)
-				    		{{ ucfirst($use) }}
+				    		{{ ucfirst(__($use)) }}
 				    		@if(!$loop->last && $loop->count != 1) , @endif
 				    	@endforeach
 				    </p>
-				    <p class="card-text"><strong>Medicinal</strong>: {{ $species->medicinal_use ? "Yes" : "No" }}
+				    <p class="card-text"><strong>{{ __('Medicinal') }}</strong>: {{ $species->medicinal_use ? __('Yes') : __('No') }}
 				    </p>
 				  </div>
 				</div>
@@ -95,30 +95,30 @@
 			<div class="card-deck mb-3">
 				<div class="card">
 				  <div class="card-header">
-				    Ornemental
+				    {{ __('Ornemental') }}
 				  </div>
 				  <div class="card-body">
-				    <p class="card-text"><strong>Flowering period</strong>:
+				    <p class="card-text"><strong>{{ __('Flowering period') }}</strong>:
 				    	@foreach($species->flowering_period as $period)
-				    		{{ ucfirst($period) }}
+				    		{{ ucfirst(__($period)) }}
 				    		@if(!$loop->last && $loop->count != 1) , @endif
 				    	@endforeach
 				    </p>
-				    <p class="card-text"><strong>Flowering color</strong>:
+				    <p class="card-text"><strong>{{ __('Flowering color') }}</strong>:
 				    	@foreach($species->flowering_color as $color)
-				    		{{ ucfirst($color) }}
+				    		{{ ucfirst(__($color)) }}
 				    		@if(!$loop->last && $loop->count != 1) , @endif
 				    	@endforeach
 				    </p>
-				    <p class="card-text"><strong>Foliage color</strong>:
+				    <p class="card-text"><strong>{{ __('Foliage color') }}</strong>:
 				    	@foreach($species->foliage_color as $color)
-				    		{{ ucfirst($color) }}
+				    		{{ ucfirst(__($color)) }}
 				    		@if(!$loop->last && $loop->count != 1) , @endif
 				    	@endforeach
 				    </p>
-				    <p class="card-text"><strong>Post summer appeal</strong>:
+				    <p class="card-text"><strong>{{ __('Post summer appeal') }}</strong>:
 				    	@foreach($species->post_summer_appeal as $season)
-				    		{{ ucfirst($season) }}
+				    		{{ ucfirst(__($season)) }}
 				    		@if(!$loop->last && $loop->count != 1) , @endif
 				    	@endforeach
 				    </p>
@@ -127,30 +127,30 @@
 
 				<div class="card">
 				  <div class="card-header">
-				    Horticulture
+				    {{ __('Horticulture') }}
 				  </div>
 				  <div class="card-body">
-				    <p class="card-text"><strong>Growth</strong>:
+				    <p class="card-text"><strong>{{ __('Growth') }}</strong>:
 				    	@foreach($species->growth as $speed)
-				    		{{ ucfirst($speed) }}
+				    		{{ ucfirst(__($speed)) }}
 				    		@if(!$loop->last && $loop->count != 1) , @endif
 				    	@endforeach
 				    </p>
-				    <p class="card-text"><strong>Pruning period</strong>:
+				    <p class="card-text"><strong>{{ __('Pruning period') }}</strong>:
 				    	@foreach($species->pruning_period as $period)
-				    		{{ ucfirst($period) }}
+				    		{{ ucfirst(__($period)) }}
 				    		@if(!$loop->last && $loop->count != 1) , @endif
 				    	@endforeach
 				    </p>
-				    <p class="card-text"><strong>Multiplication</strong>:
+				    <p class="card-text"><strong>{{ __('Multiplication') }}</strong>:
 				    	@foreach($species->multiplication as $method)
-				    		{{ ucfirst($method) }}
+				    		{{ ucfirst(__($method)) }}
 				    		@if(!$loop->last && $loop->count != 1) , @endif
 				    	@endforeach
 				    </p>
-				    <p class="card-text"><strong>Disadvantages</strong>:
+				    <p class="card-text"><strong>{{ __('Disadvantages') }}</strong>:
 				    	@foreach($species->disadvantages as $disadvantage)
-				    		{{ ucfirst($disadvantage) }}
+				    		{{ ucfirst(__($disadvantage)) }}
 				    		@if(!$loop->last && $loop->count != 1) , @endif
 				    	@endforeach
 				    </p>
@@ -160,36 +160,36 @@
 
 			<div class="card-deck mb-3">
 				<div class="card">
-			  		<h5 class="card-header">Functions</h5>
+			  		<h5 class="card-header">{{ __('Functions') }}</h5>
 
 					<div class="card-body">
-						<p class="card-text"><strong>Nitrogen fixer</strong>:
-							{{ $species->nitrogen_fixer ? "Yes" : "No" }}
+						<p class="card-text"><strong>{{ __('Nitrogen fixer') }}</strong>:
+							{{ $species->nitrogen_fixer ? __('Yes') : __('No') }}
 						</p>
-						<p class="card-text"><strong>Nutrients accumulator</strong>:
-							{{ $species->nutrient_accumulator ? "Yes" : "No" }}
+						<p class="card-text"><strong>{{ __('Nutrients accumulator') }}</strong>:
+							{{ $species->nutrient_accumulator ? __('Yes') : __('No') }}
 						</p>
-						<p class="card-text"><strong>Ground cover</strong>:
-							{{ $species->ground_cover ? "Yes" : "No" }}
+						<p class="card-text"><strong>{{ __('Ground cover') }}</strong>:
+							{{ $species->ground_cover ? __('Yes') : __('No') }}
 						</p>
-						<p class="card-text"><strong>Hedge</strong>:
-							{{ $species->hedge ? "Yes" : "No" }}
+						<p class="card-text"><strong>{{ __('Hedge') }}</strong>:
+							{{ $species->hedge ? __('Yes') : __('No') }}
 						</p>
-						<p class="card-text"><strong>Wildlife use</strong>:
+						<p class="card-text"><strong>{{ __('Wildlife uses') }}</strong>:
 							@foreach($species->wildlife_use as $use)
-								{{ ucfirst($use) }}
+								{{ ucfirst(__($use)) }}
 								@if(!$loop->last && $loop->count != 1) , @endif
 							@endforeach
 						</p>
-						<p class="card-text"><strong>Ecological use</strong>:
+						<p class="card-text"><strong>{{ __('Ecological uses') }}</strong>:
 							@foreach($species->ecological_use as $use)
-								{{ ucfirst($use) }}
+								{{ ucfirst(__($use)) }}
 								@if(!$loop->last && $loop->count != 1) , @endif
 							@endforeach
 						</p>
-						<p class="card-text"><strong>Pollinating type</strong>:
+						<p class="card-text"><strong>{{ __('Pollinating type') }}</strong>:
 							@foreach($species->pollinating_type as $type)
-								{{ ucfirst($type) }}
+								{{ ucfirst(__($type)) }}
 								@if(!$loop->last && $loop->count != 1) , @endif
 							@endforeach
 						</p>
@@ -213,7 +213,7 @@
 
 			@if(!empty($species->maintainers_note))
 			<div class="card mb-3">
-			  <h5 class="card-header">Database maintainers' notes</h5>
+			  <h5 class="card-header">{{ __('Administrators notes') }}</h5>
 			  <div class="card-body">
 			    {!! $species->maintainers_note !!}
 			</div>
