@@ -432,6 +432,48 @@
                         </div>
                     </div>
 
+                    <h5 class="card-title text-md-center">Uses</h5>
+
+                    <div class="form-group row">
+                        <label for="medicinal_use" class="col-md-3 col-form-label text-md-right">{{ __('Medicinal use') }}</label>
+
+                        <div class="col-md-6">
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="medicinal_use" id="medicinal_use_yes" value="1" @if(!is_null($species->medicinal_use) && $species->medicinal_use) CHECKED @endif>
+                              <label class="form-check-label" for="medicinal_use_yes">Yes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="medicinal_use" id="medicinal_use_no" value="0" @if(!is_null($species->medicinal_use) && !$species->medicinal_use) CHECKED @endif>
+                              <label class="form-check-label" for="nitrogen_fixer_no">No</label>
+                            </div>
+
+                            @error('medicinal_use')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="comestible_use" class="col-md-3 col-form-label text-md-right">{{ __('Comestible use') }}</label>
+
+                        <div class="col-md-6">
+                            @foreach(App\Species::COMESTIBLE_USES as $key => $use)
+                            <div class="custom-control custom-switch">
+                              <input type="checkbox" class="custom-control-input" id="comestible_use_{{ $use }}" name="comestible_use[]" value="{{ $use }}" @if(!is_null($species->comestible_use) && in_array($use, $species->comestible_use)) CHECKED @endif>
+                              <label class="custom-control-label" for="comestible_use_{{ $use }}">{{ ucfirst($use) }}</label>
+                            </div>
+                            @endforeach
+
+                            @error('comestible_use')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
                     <div class="card-footer">
                         <button type="submit" class="btn btn-sm btn-primary">
                             {{ __('Update') }}

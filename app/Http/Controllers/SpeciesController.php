@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Genus;
+use App\Rules\ComestibleUse;
 use App\Rules\EcologicalUse;
 use App\Rules\HardinessCa;
 use App\Rules\PollinatingType;
@@ -67,6 +68,8 @@ class SpeciesController extends Controller
             'wildlife_use' => ['nullable', new WildlifeUse],
             'ecological_use' => ['nullable', new EcologicalUse],
             'pollinating_type' => ['nullable', new PollinatingType],
+            'medicinal_use' => 'nullable|boolean',
+            'comestible_use' => ['nullable', new ComestibleUse],
         ]);
 
         if ($validatedData['hardiness_ca'] == "null") {
@@ -133,6 +136,8 @@ class SpeciesController extends Controller
             'wildlife_use' => ['nullable', new WildlifeUse],
             'ecological_use' => ['nullable', new EcologicalUse],
             'pollinating_type' => ['nullable', new PollinatingType],
+            'medicinal_use' => 'nullable|boolean',
+            'comestible_use' => ['nullable', new ComestibleUse],
         ]);
 
         $validatedData['sun'] = !isset($validatedData['sun']) ? null : $validatedData['sun'];
@@ -143,6 +148,7 @@ class SpeciesController extends Controller
         $validatedData['wildlife_use'] = !isset($validatedData['wildlife_use']) ? null : $validatedData['wildlife_use'];
         $validatedData['ecological_use'] = !isset($validatedData['ecological_use']) ? null : $validatedData['ecological_use'];
         $validatedData['pollinating_type'] = !isset($validatedData['pollinating_type']) ? null : $validatedData['pollinating_type'];
+        $validatedData['comestible_use'] = !isset($validatedData['comestible_use']) ? null : $validatedData['comestible_use'];
         
 
         $species->update($validatedData);
