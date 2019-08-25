@@ -73,7 +73,15 @@
 				    Uses
 				  </div>
 				  <div class="card-body">
-				    <p class="card-text"><strong>Comestible</strong>: {{ $species->comestible_use ? "Yes" : "No" }}
+				    <p class="card-text"><strong>Comestible</strong>:
+				    	@if($species->comestible_use == null)
+				    	None or unknown.
+				    	@else
+				    	@foreach($species->comestible_use as $use)
+				    		{{ ucfirst($use) }}
+				    		@if(!$loop->last && $loop->count != 1) , @endif
+				    	@endforeach
+				    	@endif
 				    </p>
 				    <p class="card-text"><strong>Medicinal</strong>: {{ $species->medicinal_use ? "Yes" : "No" }}
 				    </p>
