@@ -158,40 +158,57 @@
 				</div>
 			</div>
 
-			<div class="card mb-3">
-			  <h5 class="card-header">Functions</h5>
-			  <div class="card-body">
-			    <p class="card-text"><strong>Nitrogen fixer</strong>:
-			    	{{ $species->nitrogen_fixer ? "Yes" : "No" }}
-			    </p>
-			    <p class="card-text"><strong>Nutrients accumulator</strong>:
-			    	{{ $species->nutrient_accumulator ? "Yes" : "No" }}
-			    </p>
-			    <p class="card-text"><strong>Ground cover</strong>:
-			    	{{ $species->ground_cover ? "Yes" : "No" }}
-			    </p>
-			    <p class="card-text"><strong>Hedge</strong>:
-			    	{{ $species->hedge ? "Yes" : "No" }}
-			    </p>
-			    <p class="card-text"><strong>Wildlife use</strong>:
-			    	@foreach($species->wildlife_use as $use)
-			    		{{ ucfirst($use) }}
-			    		@if(!$loop->last && $loop->count != 1) , @endif
-			    	@endforeach
-			    </p>
-			    <p class="card-text"><strong>Ecological use</strong>:
-			    	@foreach($species->ecological_use as $use)
-			    		{{ ucfirst($use) }}
-			    		@if(!$loop->last && $loop->count != 1) , @endif
-			    	@endforeach
-			    </p>
-			    <p class="card-text"><strong>Pollinating type</strong>:
-			    	@foreach($species->pollinating_type as $type)
-			    		{{ ucfirst($type) }}
-			    		@if(!$loop->last && $loop->count != 1) , @endif
-			    	@endforeach
-			    </p>
-			  </div>
+			<div class="card-deck mb-3">
+				<div class="card">
+			  		<h5 class="card-header">Functions</h5>
+
+					<div class="card-body">
+						<p class="card-text"><strong>Nitrogen fixer</strong>:
+							{{ $species->nitrogen_fixer ? "Yes" : "No" }}
+						</p>
+						<p class="card-text"><strong>Nutrients accumulator</strong>:
+							{{ $species->nutrient_accumulator ? "Yes" : "No" }}
+						</p>
+						<p class="card-text"><strong>Ground cover</strong>:
+							{{ $species->ground_cover ? "Yes" : "No" }}
+						</p>
+						<p class="card-text"><strong>Hedge</strong>:
+							{{ $species->hedge ? "Yes" : "No" }}
+						</p>
+						<p class="card-text"><strong>Wildlife use</strong>:
+							@foreach($species->wildlife_use as $use)
+								{{ ucfirst($use) }}
+								@if(!$loop->last && $loop->count != 1) , @endif
+							@endforeach
+						</p>
+						<p class="card-text"><strong>Ecological use</strong>:
+							@foreach($species->ecological_use as $use)
+								{{ ucfirst($use) }}
+								@if(!$loop->last && $loop->count != 1) , @endif
+							@endforeach
+						</p>
+						<p class="card-text"><strong>Pollinating type</strong>:
+							@foreach($species->pollinating_type as $type)
+								{{ ucfirst($type) }}
+								@if(!$loop->last && $loop->count != 1) , @endif
+							@endforeach
+						</p>
+					</div>
+				</div>
+
+				@if($species->suppliers->isNotEmpty())
+				<div class="card">
+			  		<h5 class="card-header">Suppliers</h5>
+
+					<div class="card-body">
+						<ul>
+							@foreach($species->suppliers as $supplier)
+							<li><a href="{{ $supplier->url }}" target="_blank">{{ $supplier->name }}</a></li>
+							@endforeach
+						</ul>
+					</div>
+				</div>
+				@endif
 			</div>
 
 			@if(!empty($species->maintainers_note))

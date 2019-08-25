@@ -653,36 +653,57 @@
                     </div>
                 </div>
 
-                <div class="card mb-3">
-                    <div class="card-header">Others</div>
-                    <div class="card-body">
-                        <div class="form-group row">
-                            <label for="interesting_cultivar" class="col-md-3 col-form-label text-md-right">{{ __('Interesting cultivars') }}</label>
+                <div class="card-deck mb-3">
+                    <div class="card">
+                        <div class="card-header">Others</div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label for="interesting_cultivar" class="col-md-3 col-form-label text-md-right">{{ __('Interesting cultivars') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="interesting_cultivar" type="text" class="form-control @error('interesting_cultivar') is-invalid @enderror" name="interesting_cultivar" value="@if(!empty($species->interestng_cultvar)) {{ implode(',', $species->interesting_cultivar)}} @endif " autofocus>
+                                <div class="col-md-6">
+                                    <input id="interesting_cultivar" type="text" class="form-control @error('interesting_cultivar') is-invalid @enderror" name="interesting_cultivar" value="@if(!empty($species->interestng_cultvar)) {{ implode(',', $species->interesting_cultivar)}} @endif " autofocus>
 
-                                <span class="form-text">Separate each cultivar with comas,<br>ex: <code>a cool cultivar,cultivar1,another cultivar</code></span>
+                                    <span class="form-text">Separate each cultivar with comas,<br>ex: <code>a cool cultivar,cultivar1,another cultivar</code></span>
 
-                                @error('interesting_cultivar')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                    @error('interesting_cultivar')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="maintainers_note" class="col-md-3 col-form-label text-md-right">{{ __('Maintainer\'s notes') }}</label>
+                            <div class="form-group row">
+                                <label for="maintainers_note" class="col-md-3 col-form-label text-md-right">{{ __('Maintainer\'s notes') }}</label>
 
-                            <div class="col-md-6">
-                                <textarea class="form-control" name="maintainers_note" id="maintainers-note" rows="3">{!! $species->maintainers_note !!}</textarea>
+                                <div class="col-md-6">
+                                    <textarea class="form-control" name="maintainers_note" id="maintainers-note" rows="3">{!! $species->maintainers_note !!}</textarea>
 
-                                @error('maintainers_note')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                    @error('maintainers_note')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="suppliers" class="col-md-3 col-form-label text-md-right">{{ __('Suppliers') }}</label>
+
+                                <div class="col-md-6">
+                                    @foreach(App\Supplier::all() as $supplier)
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="supplier_{{ $supplier->id }}" name="suppliers[]" value="{{ $supplier->id }}" @if($species->suppliers->isNotEmpty() && $species->suppliers->contains($supplier->id)) CHECKED @endif>
+                                      <label class="custom-control-label" for="supplier_{{ $supplier->id }}">{{ $supplier->name }}</label>
+                                    </div>
+                                    @endforeach
+
+                                    @error('suppliers')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                     </div>

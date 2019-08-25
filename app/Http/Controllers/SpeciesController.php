@@ -87,12 +87,14 @@ class SpeciesController extends Controller
             'disadvantages' => ['nullable', new Disadvantages],
             'interesting_cultivar' => 'nullable',
             'maintainers_note' => 'nullable',
+            'suppliers' => 'nullable',
         ]);
 
         $validatedData['interesting_cultivar'] = !isset($validatedData['interesting_cultivar']) ? null : explode(',', $validatedData['interesting_cultivar']);
 
         $genus = Genus::find($validatedData['genus']);
-        $genus->species()->create($validatedData);
+        $species = $genus->species()->create($validatedData);
+        $species->suppliers()->sync($validatedData['suppliers']);
 
         return redirect()->route('species.index')->with('status', 'Added!');
     }
@@ -155,6 +157,7 @@ class SpeciesController extends Controller
             'comestible_use' => ['nullable', new ComestibleUse],
             'interesting_cultivar' => 'nullable',
             'maintainers_note' => 'nullable',
+            'suppliers' => 'nullable',
         ]);
 
         $validatedData['sun'] = !isset($validatedData['sun']) ? null : $validatedData['sun'];
@@ -170,6 +173,7 @@ class SpeciesController extends Controller
         
 
         $species->update($validatedData);
+        $species->suppliers()->sync($validatedData['suppliers']);
 
         return redirect()->route('species.edit', $species)->with('status', 'Updated!');
     }

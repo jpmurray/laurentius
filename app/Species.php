@@ -60,6 +60,11 @@ class Species extends Model
         return $this->belongsTo(Genus::class);
     }
 
+    public function suppliers()
+    {
+        return $this->belongsToMany(Supplier::class);
+    }
+
     public function getBinominalNameAttribute()
     {
         return $this->genus->name . " " . strtolower($this->name);

@@ -7,6 +7,7 @@
 - Ability to add maintainers' notes to a species.
 - Icon to see public pages for a species in its edit page.
 - Summernote added for maintainer's notes.
+- Manage suppliers and associates them to species.
 
 # 0.4.0 - Pre-release (2019-08-25)
 - Fix comestible usage information on show page.

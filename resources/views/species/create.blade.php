@@ -699,6 +699,25 @@
                                 @enderror
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                                <label for="suppliers" class="col-md-3 col-form-label text-md-right">{{ __('Suppliers') }}</label>
+
+                                <div class="col-md-6">
+                                    @foreach(App\Supplier::all() as $supplier)
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="supplier_{{ $supplier->id }}" name="suppliers[]" value="{{ $supplier->id }}">
+                                      <label class="custom-control-label" for="supplier_{{ $supplier->id }}">{{ $supplier->name }}</label>
+                                    </div>
+                                    @endforeach
+
+                                    @error('suppliers')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
                     </div>
                 </div>
 

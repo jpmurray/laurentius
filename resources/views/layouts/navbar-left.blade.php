@@ -28,5 +28,5 @@
         </div>
     </li>
     <a class="nav-link" href="{{ route("species.index") }}">Manage species</a>
-    {{-- <a class="nav-link" href="{{ route("settings") }}">Settings</a> --}}
+    <a class="nav-link" href="{{ route("suppliers.index") }}">Manage suppliers</a>
 </ul>
