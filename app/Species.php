@@ -18,7 +18,7 @@ class Species extends Model
     const COMESTIBLE_USES = ['flower', 'fruit', 'leave', 'nut', 'seed', 'root'];
     const FLOWERING_PERIODS = ['spring', 'summer', 'fall'];
     const FLOWERING_COLORS = ['red', 'rose', 'white', 'yellow', 'orange', 'purple'];
-    const FOLIAGE_COLORS = ['gree', 'pale', 'dark', 'purple'];
+    const FOLIAGE_COLORS = ['green', 'pale', 'dark', 'purple'];
     const POST_SUMMER_APPEALS = ['fall', 'winter'];
     const GROWTH_SPEEDS = ['fast', 'medium', 'slow'];
     const PRUNING_PERIODS = ['before budding', 'after flowering', 'summer', 'fall', 'anytime', "Don't prune"];
