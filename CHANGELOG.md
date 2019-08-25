@@ -1,5 +1,12 @@
 # Changelog
 
+# 0.4.0 - Pre-release (2019-08-25)
+- Fix comestible usage information on show page.
+- Changed layout of _species_ create and edit pages.
+- Uniformized term "mid" to "medium" in soil constant of _species_.
+- Fields in _species_ creation are set to sensible default.
+- Seeder for Kolomikta as example.
+
 # 0.3.0 - Pre-release (2019-08-24)
 
 - Can add additional informations to _species_: uses, ornemental, horticulture.

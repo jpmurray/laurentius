@@ -9,16 +9,21 @@
                     {{ session('status') }}
                 </div>
             @endif
+
+            <div class="card text-white bg-info mb-3">
+                <div class="card-body">
+                    Here you can edit known informations about {{ $species->binominal_name }}. <strong>Mandatory fields are marked with an asterisk (*).</strong>
+                </div>
+            </div>
             
-            <div class="card">
-                <form method="POST" action="{{ route('species.update', $species) }}">
-                    @csrf
-                    @method('PUT')
-                    <div class="card-header">Edit species {{ $species->name }}</div>
+            <form method="POST" action="{{ route('species.update', $species) }}">
+                @csrf
+                @method('PUT')
+
+                <div class="card mb-3">
+                    <div class="card-header">Taxonomy</div>
 
                     <div class="card-body">
-                        <h5 class="card-title text-md-center">Taxonomy</h5>
-
                         <div class="form-group row">
                             <label for="genus" class="col-md-3 col-form-label text-md-right">{{ __('Genus') }}</label>
 
@@ -78,565 +83,602 @@
                                 @enderror
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                        <h5 class="card-title text-md-center">Needs / Tolerance</h5>
+                <div class="card-deck mb-3">
+                    <div class="card">
+                        <div class="card-header">
+                            Tolerance / Needs
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label for="hardiness_ca" class="col-md-3 col-form-label text-md-right">{{ __('Plan hardiness (Canada)') }}</label>
 
-                        <div class="form-group row">
-                            <label for="hardiness_ca" class="col-md-3 col-form-label text-md-right">{{ __('Plan hardiness (Canada)') }}</label>
+                                <div class="col-md-6">
+                                    <select id="hardiness_ca" class="custom-select @error('hardiness_ca') is-invalid @enderror" name="hardiness_ca">
+                                        <option value="null">Unknown</option>
+                                        @foreach(App\Species::HARDINESS_CA as $key => $hardiness)
+                                        <option value="{{ $hardiness }}" @if($species->hardiness_ca == $hardiness) SELECTED @endif>{{ $hardiness }}</option>
+                                        @endforeach
+                                    </select>
 
-                            <div class="col-md-6">
-                                <select id="hardiness_ca" class="custom-select @error('hardiness_ca') is-invalid @enderror" name="hardiness_ca">
-                                    <option value="null">Unknown</option>
-                                    @foreach(App\Species::HARDINESS_CA as $key => $hardiness)
-                                    <option value="{{ $hardiness }}" @if($species->hardiness_ca == $hardiness) SELECTED @endif>{{ $hardiness }}</option>
+                                    @error('hardiness_ca')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="sun" class="col-md-3 col-form-label text-md-right">{{ __('Sun') }}</label>
+
+                                <div class="col-md-6">
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="sun_full" name="sun[]" value="full" @if(!is_null($species->sun) && in_array('full',$species->sun)) CHECKED @endif>
+                                      <label class="custom-control-label" for="sun_full">Full sun</label>
+                                    </div>
+
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="sun_partial" name="sun[]" value="partial" @if(!is_null($species->sun) && in_array('partial',$species->sun)) CHECKED @endif>
+                                      <label class="custom-control-label" for="sun_partial">Partial</label>
+                                    </div>
+
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="full_shade" name="sun[]" value="shade" @if(!is_null($species->sun) && in_array('shade',$species->sun)) CHECKED @endif>
+                                      <label class="custom-control-label" for="full_shade">Full shade</label>
+                                    </div>
+
+                                    @error('sun')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="soil" class="col-md-3 col-form-label text-md-right">{{ __('Soil') }}</label>
+
+                                <div class="col-md-6">
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="soil_light" name="soil[]" value="light" @if(!is_null($species->soil) && in_array('light',$species->soil)) CHECKED @endif>
+                                      <label class="custom-control-label" for="soil_light">Light</label>
+                                    </div>
+
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="soil_medium" name="soil[]" value="medium" @if(!is_null($species->soil) && in_array('medium',$species->soil)) CHECKED @endif>
+                                      <label class="custom-control-label" for="soil_medium">Medium</label>
+                                    </div>
+
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="soil_heavy" name="soil[]" value="heavy" @if(!is_null($species->soil) && in_array('heavy',$species->soil)) CHECKED @endif>
+                                      <label class="custom-control-label" for="soil_heavy">Heavy</label>
+                                    </div>
+
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="soil_aqua" name="soil[]" value="aqua" @if(!is_null($species->soil) && in_array('aqua',$species->soil)) CHECKED @endif>
+                                      <label class="custom-control-label" for="soil_aqua">Aquatic</label>
+                                    </div>
+
+                                    @error('soil')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="water" class="col-md-3 col-form-label text-md-right">{{ __('Water') }}</label>
+
+                                <div class="col-md-6">
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="water" id="water_1" value="1" @if(!is_null($species->water) && $species->water == 1) CHECKED @endif>
+                                      <label class="form-check-label" for="water_1">1</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="water" id="water_2" value="2" @if(!is_null($species->water) && $species->water == 2) CHECKED @endif>
+                                      <label class="form-check-label" for="water_2">2</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="water" id="water_3" value="3" @if(!is_null($species->water) && $species->water == 3) CHECKED @endif>
+                                      <label class="form-check-label" for="water_3">3</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="water" id="water_4" value="4" @if(!is_null($species->water) && $species->water == 4) CHECKED @endif>
+                                      <label class="form-check-label" for="water_4">4</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="water" id="water_5" value="5" @if(!is_null($species->water) && $species->water == 5) CHECKED @endif>
+                                      <label class="form-check-label" for="water_5">5</label>
+                                    </div>
+
+                                    @error('soil')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="ph_min" class="col-md-3 col-form-label text-md-right">{{ __('PH (Mininum)') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="ph_min" type="text" class="form-control @error('ph_min') is-invalid @enderror" name="ph_min" value="{{ $species->ph_min }}" autocomplete="ph_min" autofocus>
+
+                                    @error('ph_min')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="ph_max" class="col-md-3 col-form-label text-md-right">{{ __('PH (Maximum)') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="ph_max" type="text" class="form-control @error('ph_max') is-invalid @enderror" name="ph_max" value="{{ $species->ph_max }}" autocomplete="ph_max" autofocus>
+
+                                    @error('ph_max')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            Architecture
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label for="shape" class="col-md-3 col-form-label text-md-right">{{ __('Shape') }}</label>
+
+                                <div class="col-md-6">
+                                    @foreach(App\Species::SHAPES as $key => $shape)
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="shape_{{ $shape }}" name="shape[]" value="{{ $shape }}" @if(!is_null($species->shape) && in_array($shape, $species->shape)) CHECKED @endif>
+                                      <label class="custom-control-label" for="shape_{{ $shape }}">{{ ucfirst($shape) }}</label>
+                                    </div>
                                     @endforeach
-                                </select>
 
-                                @error('hardiness_ca')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="sun" class="col-md-3 col-form-label text-md-right">{{ __('Sun') }}</label>
-
-                            <div class="col-md-6">
-                                <div class="custom-control custom-switch">
-                                  <input type="checkbox" class="custom-control-input" id="sun_full" name="sun[]" value="full" @if(!is_null($species->sun) && in_array('full',$species->sun)) CHECKED @endif>
-                                  <label class="custom-control-label" for="sun_full">Full sun</label>
+                                    @error('sun')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
+                            </div>
 
-                                <div class="custom-control custom-switch">
-                                  <input type="checkbox" class="custom-control-input" id="sun_partial" name="sun[]" value="partial" @if(!is_null($species->sun) && in_array('partial',$species->sun)) CHECKED @endif>
-                                  <label class="custom-control-label" for="sun_partial">Partial</label>
+                            <div class="form-group row">
+                                <label for="root" class="col-md-3 col-form-label text-md-right">{{ __('Root') }}</label>
+
+                                <div class="col-md-6">
+                                    @foreach(App\Species::ROOTS as $key => $root)
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="root_{{ $root }}" name="root[]" value="{{ $root }}" @if(!is_null($species->root) && in_array($root, $species->root)) CHECKED @endif>
+                                      <label class="custom-control-label" for="root_{{ $root }}">{{ ucfirst($root) }}</label>
+                                    </div>
+                                    @endforeach
+
+                                    @error('sun')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
+                            </div>
 
-                                <div class="custom-control custom-switch">
-                                  <input type="checkbox" class="custom-control-input" id="full_shade" name="sun[]" value="shade" @if(!is_null($species->sun) && in_array('shade',$species->sun)) CHECKED @endif>
-                                  <label class="custom-control-label" for="full_shade">Full shade</label>
+                            <div class="form-group row">
+                                <label for="maturity_height_meters" class="col-md-3 col-form-label text-md-right">{{ __('Hight, maturity (meters)') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="maturity_height_meters" type="text" class="form-control @error('maturity_height_meters') is-invalid @enderror" name="maturity_height_meters" value="{{ $species->maturity_height_meters }}" autocomplete="maturity_height_meters" autofocus>
+
+                                    @error('maturity_height_meters')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-
-                                @error('sun')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="soil" class="col-md-3 col-form-label text-md-right">{{ __('Soil') }}</label>
+                            <div class="form-group row">
+                                <label for="maturity_width_meters" class="col-md-3 col-form-label text-md-right">{{ __('Width, maturity (meters)') }}</label>
 
-                            <div class="col-md-6">
-                                <div class="custom-control custom-switch">
-                                  <input type="checkbox" class="custom-control-input" id="soil_light" name="soil[]" value="light" @if(!is_null($species->soil) && in_array('light',$species->soil)) CHECKED @endif>
-                                  <label class="custom-control-label" for="soil_light">Light</label>
+                                <div class="col-md-6">
+                                    <input id="maturity_width_meters" type="text" class="form-control @error('maturity_width_meters') is-invalid @enderror" name="maturity_width_meters" value="{{ $species->maturity_width_meters }}" autocomplete="maturity_width_meters" autofocus>
+
+                                    @error('maturity_width_meters')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                                <div class="custom-control custom-switch">
-                                  <input type="checkbox" class="custom-control-input" id="soil_medium" name="soil[]" value="mid" @if(!is_null($species->soil) && in_array('mid',$species->soil)) CHECKED @endif>
-                                  <label class="custom-control-label" for="soil_medium">Medium</label>
+                <div class="card-deck mb-3">
+                    <div class="card">
+                        <div class="card-header">
+                            Functions
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label for="nitrogen_fixer" class="col-md-3 col-form-label text-md-right">{{ __('Nitrogen fixer') }}</label>
+
+                                <div class="col-md-6">
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="nitrogen_fixer" id="nitrogen_fixer_yes" value="1" @if(!is_null($species->nitrogen_fixer) && $species->nitrogen_fixer) CHECKED @endif>
+                                      <label class="form-check-label" for="nitrogen_fixer_yes">Yes</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="nitrogen_fixer" id="nitrogen_fixer_no" value="0" @if(!is_null($species->nitrogen_fixer) && !$species->nitrogen_fixer) CHECKED @endif>
+                                      <label class="form-check-label" for="nitrogen_fixer_no">No</label>
+                                    </div>
+
+                                    @error('soil')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
+                            </div>
 
-                                <div class="custom-control custom-switch">
-                                  <input type="checkbox" class="custom-control-input" id="soil_heavy" name="soil[]" value="heavy" @if(!is_null($species->soil) && in_array('heavy',$species->soil)) CHECKED @endif>
-                                  <label class="custom-control-label" for="soil_heavy">Heavy</label>
+                            <div class="form-group row">
+                                <label for="nutrient_accumulator" class="col-md-3 col-form-label text-md-right">{{ __('Nutrients accumulator') }}</label>
+
+                                <div class="col-md-6">
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="nutrient_accumulator" id="nutrient_accumulator_yes" value="1" @if(!is_null($species->nutrient_accumulator) && $species->nutrient_accumulator) CHECKED @endif>
+                                      <label class="form-check-label" for="nutrient_accumulator_yes">Yes</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="nutrient_accumulator" id="nutrient_accumulator_no" value="0" @if(!is_null($species->nutrient_accumulator) && !$species->nutrient_accumulator) CHECKED @endif>
+                                      <label class="form-check-label" for="nutrient_accumulator_no">No</label>
+                                    </div>
+
+                                    @error('soil')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
+                            </div>
 
-                                <div class="custom-control custom-switch">
-                                  <input type="checkbox" class="custom-control-input" id="soil_aqua" name="soil[]" value="aqua" @if(!is_null($species->soil) && in_array('aqua',$species->soil)) CHECKED @endif>
-                                  <label class="custom-control-label" for="soil_aqua">Aquatic</label>
+                            <div class="form-group row">
+                                <label for="ground_cover" class="col-md-3 col-form-label text-md-right">{{ __('Ground cover') }}</label>
+
+                                <div class="col-md-6">
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="ground_cover" id="ground_cover_yes" value="1" @if(!is_null($species->ground_cover) && $species->ground_cover) CHECKED @endif>
+                                      <label class="form-check-label" for="ground_cover_yes">Yes</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="ground_cover" id="ground_cover_no" value="0" @if(!is_null($species->ground_cover) && !$species->ground_cover) CHECKED @endif>
+                                      <label class="form-check-label" for="ground_cover_no">No</label>
+                                    </div>
+
+                                    @error('soil')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-
-                                @error('soil')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="water" class="col-md-3 col-form-label text-md-right">{{ __('Water') }}</label>
+                            <div class="form-group row">
+                                <label for="hedge" class="col-md-3 col-form-label text-md-right">{{ __('Hedge') }}</label>
 
-                            <div class="col-md-6">
-                                <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="water" id="water_1" value="1" @if(!is_null($species->water) && $species->water == 1) CHECKED @endif>
-                                  <label class="form-check-label" for="water_1">1</label>
+                                <div class="col-md-6">
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="hedge" id="hedge_yes" value="1" @if(!is_null($species->hedge) && $species->hedge) CHECKED @endif>
+                                      <label class="form-check-label" for="hedge_yes">Yes</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="hedge" id="hedge_no" value="0" @if(!is_null($species->hedge) && !$species->hedge) CHECKED @endif>
+                                      <label class="form-check-label" for="hedge_no">No</label>
+                                    </div>
+
+                                    @error('soil')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                                <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="water" id="water_2" value="2" @if(!is_null($species->water) && $species->water == 2) CHECKED @endif>
-                                  <label class="form-check-label" for="water_2">2</label>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="wildlife_use" class="col-md-3 col-form-label text-md-right">{{ __('Wildlife uses') }}</label>
+
+                                <div class="col-md-6">
+                                    @foreach(App\Species::WILDLIFE_USES as $key => $use)
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="wildlife_use_{{ $use }}" name="wildlife_use[]" value="{{ $use }}" @if(!is_null($species->wildlife_use) && in_array($use, $species->wildlife_use)) CHECKED @endif>
+                                      <label class="custom-control-label" for="wildlife_use_{{ $use }}">{{ ucfirst($use) }}</label>
+                                    </div>
+                                    @endforeach
+
+                                    @error('wildlife_use')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                                <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="water" id="water_3" value="3" @if(!is_null($species->water) && $species->water == 3) CHECKED @endif>
-                                  <label class="form-check-label" for="water_3">3</label>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="ecological_use" class="col-md-3 col-form-label text-md-right">{{ __('Ecological uses') }}</label>
+
+                                <div class="col-md-6">
+                                    @foreach(App\Species::ECOLOGICAL_USES as $key => $use)
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="ecological_use_{{ $use }}" name="ecological_use[]" value="{{ $use }}" @if(!is_null($species->ecological_use) && in_array($use, $species->ecological_use)) CHECKED @endif>
+                                      <label class="custom-control-label" for="ecological_use_{{ $use }}">{{ ucfirst($use) }}</label>
+                                    </div>
+                                    @endforeach
+
+                                    @error('ecological_use')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                                <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="water" id="water_4" value="4" @if(!is_null($species->water) && $species->water == 4) CHECKED @endif>
-                                  <label class="form-check-label" for="water_4">4</label>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="pollinating_type" class="col-md-3 col-form-label text-md-right">{{ __('Pollinating type') }}</label>
+
+                                <div class="col-md-6">
+                                    @foreach(App\Species::POLLINATING_TYPES as $key => $type)
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="pollinating_type_{{ $type }}" name="pollinating_type[]" value="{{ $type }}" @if(!is_null($species->pollinating_type) && in_array($type, $species->pollinating_type)) CHECKED @endif>
+                                      <label class="custom-control-label" for="pollinating_type_{{ $type }}">{{ ucfirst($type) }}</label>
+                                    </div>
+                                    @endforeach
+
+                                    @error('pollinating_type')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                                <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="water" id="water_5" value="5" @if(!is_null($species->water) && $species->water == 5) CHECKED @endif>
-                                  <label class="form-check-label" for="water_5">5</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            Usage
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label for="medicinal_use" class="col-md-3 col-form-label text-md-right">{{ __('Medicinal use') }}</label>
+
+                                <div class="col-md-6">
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="medicinal_use" id="medicinal_use_yes" value="1" @if(!is_null($species->medicinal_use) && $species->medicinal_use) CHECKED @endif>
+                                      <label class="form-check-label" for="medicinal_use_yes">Yes</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="medicinal_use" id="medicinal_use_no" value="0" @if(!is_null($species->medicinal_use) && !$species->medicinal_use) CHECKED @endif>
+                                      <label class="form-check-label" for="nitrogen_fixer_no">No</label>
+                                    </div>
+
+                                    @error('medicinal_use')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-
-                                @error('soil')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="ph_min" class="col-md-3 col-form-label text-md-right">{{ __('PH (Mininum)') }}</label>
+                            <div class="form-group row">
+                                <label for="comestible_use" class="col-md-3 col-form-label text-md-right">{{ __('Comestible use') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="ph_min" type="text" class="form-control @error('ph_min') is-invalid @enderror" name="ph_min" value="{{ $species->ph_min }}" autocomplete="ph_min" autofocus>
+                                <div class="col-md-6">
+                                    @foreach(App\Species::COMESTIBLE_USES as $key => $use)
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="comestible_use_{{ $use }}" name="comestible_use[]" value="{{ $use }}" @if(!is_null($species->comestible_use) && in_array($use, $species->comestible_use)) CHECKED @endif>
+                                      <label class="custom-control-label" for="comestible_use_{{ $use }}">{{ ucfirst($use) }}</label>
+                                    </div>
+                                    @endforeach
 
-                                @error('ph_min')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="ph_max" class="col-md-3 col-form-label text-md-right">{{ __('PH (Maximum)') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="ph_max" type="text" class="form-control @error('ph_max') is-invalid @enderror" name="ph_max" value="{{ $species->ph_max }}" autocomplete="ph_max" autofocus>
-
-                                @error('ph_max')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <h5 class="card-title text-md-center">Architecture</h5>
-
-                        <div class="form-group row">
-                            <label for="shape" class="col-md-3 col-form-label text-md-right">{{ __('Shape') }}</label>
-
-                            <div class="col-md-6">
-                                @foreach(App\Species::SHAPES as $key => $shape)
-                                <div class="custom-control custom-switch">
-                                  <input type="checkbox" class="custom-control-input" id="shape_{{ $shape }}" name="shape[]" value="{{ $shape }}" @if(!is_null($species->shape) && in_array($shape, $species->shape)) CHECKED @endif>
-                                  <label class="custom-control-label" for="shape_{{ $shape }}">{{ ucfirst($shape) }}</label>
+                                    @error('comestible_use')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                                @endforeach
-
-                                @error('sun')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                        <div class="form-group row">
-                            <label for="root" class="col-md-3 col-form-label text-md-right">{{ __('Root') }}</label>
+                <div class="card-deck mb-3">
+                    <div class="card">
+                        <div class="card-header">
+                            Ornemental
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label for="flowering_period" class="col-md-3 col-form-label text-md-right">{{ __('Flowering period') }}</label>
 
-                            <div class="col-md-6">
-                                @foreach(App\Species::ROOTS as $key => $root)
-                                <div class="custom-control custom-switch">
-                                  <input type="checkbox" class="custom-control-input" id="root_{{ $root }}" name="root[]" value="{{ $root }}" @if(!is_null($species->root) && in_array($root, $species->root)) CHECKED @endif>
-                                  <label class="custom-control-label" for="root_{{ $root }}">{{ ucfirst($root) }}</label>
+                                <div class="col-md-6">
+                                    @foreach(App\Species::FLOWERING_PERIODS as $key => $period)
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="flowering_period_{{ $period }}" name="flowering_period[]" value="{{ $period }}" @if(!is_null($species->flowering_period) && in_array($period, $species->flowering_period)) CHECKED @endif>
+                                      <label class="custom-control-label" for="flowering_period_{{ $period }}">{{ ucfirst($period) }}</label>
+                                    </div>
+                                    @endforeach
+
+                                    @error('flowering_period')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                                @endforeach
-
-                                @error('sun')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="maturity_height_meters" class="col-md-3 col-form-label text-md-right">{{ __('Hight, maturity (meters)') }}</label>
+                            <div class="form-group row">
+                                <label for="flowering_color" class="col-md-3 col-form-label text-md-right">{{ __('Flowering color') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="maturity_height_meters" type="text" class="form-control @error('maturity_height_meters') is-invalid @enderror" name="maturity_height_meters" value="{{ $species->maturity_height_meters }}" autocomplete="maturity_height_meters" autofocus>
+                                <div class="col-md-6">
+                                    @foreach(App\Species::FLOWERING_COLORS as $key => $color)
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="flowering_color_{{ $color }}" name="flowering_color[]" value="{{ $color }}" @if(!is_null($species->flowering_color) && in_array($color, $species->flowering_color)) CHECKED @endif>
+                                      <label class="custom-control-label" for="flowering_color_{{ $color }}">{{ ucfirst($color) }}</label>
+                                    </div>
+                                    @endforeach
 
-                                @error('maturity_height_meters')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                    @error('flowering_color')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="maturity_width_meters" class="col-md-3 col-form-label text-md-right">{{ __('Width, maturity (meters)') }}</label>
+                            <div class="form-group row">
+                                <label for="foliage_color" class="col-md-3 col-form-label text-md-right">{{ __('Foliage color') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="maturity_width_meters" type="text" class="form-control @error('maturity_width_meters') is-invalid @enderror" name="maturity_width_meters" value="{{ $species->maturity_width_meters }}" autocomplete="maturity_width_meters" autofocus>
+                                <div class="col-md-6">
+                                    @foreach(App\Species::FOLIAGE_COLORS as $key => $color)
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="foliage_color_{{ $color }}" name="foliage_color[]" value="{{ $color }}" @if(!is_null($species->foliage_color) && in_array($color, $species->foliage_color)) CHECKED @endif>
+                                      <label class="custom-control-label" for="foliage_color_{{ $color }}">{{ ucfirst($color) }}</label>
+                                    </div>
+                                    @endforeach
 
-                                @error('maturity_width_meters')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                    @error('foliage_color')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="post_summer_appeal" class="col-md-3 col-form-label text-md-right">{{ __('Post summer appeal') }}</label>
+
+                                <div class="col-md-6">
+                                    @foreach(App\Species::POST_SUMMER_APPEALS as $key => $season)
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="post_summer_appeal_{{ $season }}" name="post_summer_appeal[]" value="{{ $season }}" @if(!is_null($species->post_summer_appeal) && in_array($season, $species->post_summer_appeal)) CHECKED @endif>
+                                      <label class="custom-control-label" for="post_summer_appeal_{{ $season }}">{{ ucfirst($season) }}</label>
+                                    </div>
+                                    @endforeach
+
+                                    @error('post_summer_appeal')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <h5 class="card-title text-md-center">Functions</h5>
+                    <div class="card">
+                        <div class="card-header">
+                            Horticulture
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label for="growth" class="col-md-3 col-form-label text-md-right">{{ __('Growth') }}</label>
 
-                    <div class="form-group row">
-                        <label for="nitrogen_fixer" class="col-md-3 col-form-label text-md-right">{{ __('Nitrogen fixer') }}</label>
+                                <div class="col-md-6">
+                                    @foreach(App\Species::GROWTH_SPEEDS as $key => $speed)
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="growth_{{ $speed }}" name="growth[]" value="{{ $speed }}" @if(!is_null($species->growth) && in_array($speed, $species->growth)) CHECKED @endif>
+                                      <label class="custom-control-label" for="growth_{{ $speed }}">{{ ucfirst($speed) }}</label>
+                                    </div>
+                                    @endforeach
 
-                        <div class="col-md-6">
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="nitrogen_fixer" id="nitrogen_fixer_yes" value="1" @if(!is_null($species->nitrogen_fixer) && $species->nitrogen_fixer) CHECKED @endif>
-                              <label class="form-check-label" for="nitrogen_fixer_yes">Yes</label>
+                                    @error('flowering_period')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="nitrogen_fixer" id="nitrogen_fixer_no" value="0" @if(!is_null($species->nitrogen_fixer) && !$species->nitrogen_fixer) CHECKED @endif>
-                              <label class="form-check-label" for="nitrogen_fixer_no">No</label>
+
+                            <div class="form-group row">
+                                <label for="pruning_period" class="col-md-3 col-form-label text-md-right">{{ __('Pruning period') }}</label>
+
+                                <div class="col-md-6">
+                                    @foreach(App\Species::PRUNING_PERIODS as $key => $period)
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="pruning_period_{{ $period }}" name="pruning_period[]" value="{{ $period }}" @if(!is_null($species->pruning_period) && in_array($period, $species->pruning_period)) CHECKED @endif>
+                                      <label class="custom-control-label" for="pruning_period_{{ $period }}">{{ ucfirst($period) }}</label>
+                                    </div>
+                                    @endforeach
+
+                                    @error('pruning_period')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
 
-                            @error('soil')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <div class="form-group row">
+                                <label for="multiplication" class="col-md-3 col-form-label text-md-right">{{ __('Multiplication') }}</label>
+
+                                <div class="col-md-6">
+                                    @foreach(App\Species::MULTIPLICATIONS as $key => $method)
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="multiplication_{{ $method }}" name="multiplication[]" value="{{ $method }}" @if(!is_null($species->multiplication) && in_array($method, $species->multiplication)) CHECKED @endif>
+                                      <label class="custom-control-label" for="multiplication_{{ $method }}">{{ ucfirst($method) }}</label>
+                                    </div>
+                                    @endforeach
+
+                                    @error('multiplication')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="disadvantages" class="col-md-3 col-form-label text-md-right">{{ __('Disadvantages') }}</label>
+
+                                <div class="col-md-6">
+                                    @foreach(App\Species::DISADVANTAGES as $key => $reason)
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="disadvantages_{{ $reason }}" name="disadvantages[]" value="{{ $reason }}" @if(!is_null($species->disadvantages) && in_array($reason, $species->disadvantages)) CHECKED @endif>
+                                      <label class="custom-control-label" for="disadvantages_{{ $reason }}">{{ ucfirst($reason) }}</label>
+                                    </div>
+                                    @endforeach
+
+                                    @error('disadvantages')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="form-group row">
-                        <label for="nutrient_accumulator" class="col-md-3 col-form-label text-md-right">{{ __('Nutrients accumulator') }}</label>
+                <div class="card mb-3">
+                    <button type="submit" class="btn btn-lg btn-primary">
+                        {{ __('Update') }}
+                    </button>
+                </div>
 
-                        <div class="col-md-6">
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="nutrient_accumulator" id="nutrient_accumulator_yes" value="1" @if(!is_null($species->nutrient_accumulator) && $species->nutrient_accumulator) CHECKED @endif>
-                              <label class="form-check-label" for="nutrient_accumulator_yes">Yes</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="nutrient_accumulator" id="nutrient_accumulator_no" value="0" @if(!is_null($species->nutrient_accumulator) && !$species->nutrient_accumulator) CHECKED @endif>
-                              <label class="form-check-label" for="nutrient_accumulator_no">No</label>
-                            </div>
-
-                            @error('soil')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="ground_cover" class="col-md-3 col-form-label text-md-right">{{ __('Ground cover') }}</label>
-
-                        <div class="col-md-6">
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="ground_cover" id="ground_cover_yes" value="1" @if(!is_null($species->ground_cover) && $species->ground_cover) CHECKED @endif>
-                              <label class="form-check-label" for="ground_cover_yes">Yes</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="ground_cover" id="ground_cover_no" value="0" @if(!is_null($species->ground_cover) && !$species->ground_cover) CHECKED @endif>
-                              <label class="form-check-label" for="ground_cover_no">No</label>
-                            </div>
-
-                            @error('soil')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="hedge" class="col-md-3 col-form-label text-md-right">{{ __('Hedge') }}</label>
-
-                        <div class="col-md-6">
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="hedge" id="hedge_yes" value="1" @if(!is_null($species->hedge) && $species->hedge) CHECKED @endif>
-                              <label class="form-check-label" for="hedge_yes">Yes</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="hedge" id="hedge_no" value="0" @if(!is_null($species->hedge) && !$species->hedge) CHECKED @endif>
-                              <label class="form-check-label" for="hedge_no">No</label>
-                            </div>
-
-                            @error('soil')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="wildlife_use" class="col-md-3 col-form-label text-md-right">{{ __('Wildlife uses') }}</label>
-
-                        <div class="col-md-6">
-                            @foreach(App\Species::WILDLIFE_USES as $key => $use)
-                            <div class="custom-control custom-switch">
-                              <input type="checkbox" class="custom-control-input" id="wildlife_use_{{ $use }}" name="wildlife_use[]" value="{{ $use }}" @if(!is_null($species->wildlife_use) && in_array($use, $species->wildlife_use)) CHECKED @endif>
-                              <label class="custom-control-label" for="wildlife_use_{{ $use }}">{{ ucfirst($use) }}</label>
-                            </div>
-                            @endforeach
-
-                            @error('wildlife_use')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="ecological_use" class="col-md-3 col-form-label text-md-right">{{ __('Ecological uses') }}</label>
-
-                        <div class="col-md-6">
-                            @foreach(App\Species::ECOLOGICAL_USES as $key => $use)
-                            <div class="custom-control custom-switch">
-                              <input type="checkbox" class="custom-control-input" id="ecological_use_{{ $use }}" name="ecological_use[]" value="{{ $use }}" @if(!is_null($species->ecological_use) && in_array($use, $species->ecological_use)) CHECKED @endif>
-                              <label class="custom-control-label" for="ecological_use_{{ $use }}">{{ ucfirst($use) }}</label>
-                            </div>
-                            @endforeach
-
-                            @error('ecological_use')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="pollinating_type" class="col-md-3 col-form-label text-md-right">{{ __('Pollinating type') }}</label>
-
-                        <div class="col-md-6">
-                            @foreach(App\Species::POLLINATING_TYPES as $key => $type)
-                            <div class="custom-control custom-switch">
-                              <input type="checkbox" class="custom-control-input" id="pollinating_type_{{ $type }}" name="pollinating_type[]" value="{{ $type }}" @if(!is_null($species->pollinating_type) && in_array($type, $species->pollinating_type)) CHECKED @endif>
-                              <label class="custom-control-label" for="pollinating_type_{{ $type }}">{{ ucfirst($type) }}</label>
-                            </div>
-                            @endforeach
-
-                            @error('pollinating_type')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <h5 class="card-title text-md-center">Uses</h5>
-
-                    <div class="form-group row">
-                        <label for="medicinal_use" class="col-md-3 col-form-label text-md-right">{{ __('Medicinal use') }}</label>
-
-                        <div class="col-md-6">
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="medicinal_use" id="medicinal_use_yes" value="1" @if(!is_null($species->medicinal_use) && $species->medicinal_use) CHECKED @endif>
-                              <label class="form-check-label" for="medicinal_use_yes">Yes</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="medicinal_use" id="medicinal_use_no" value="0" @if(!is_null($species->medicinal_use) && !$species->medicinal_use) CHECKED @endif>
-                              <label class="form-check-label" for="nitrogen_fixer_no">No</label>
-                            </div>
-
-                            @error('medicinal_use')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="comestible_use" class="col-md-3 col-form-label text-md-right">{{ __('Comestible use') }}</label>
-
-                        <div class="col-md-6">
-                            @foreach(App\Species::COMESTIBLE_USES as $key => $use)
-                            <div class="custom-control custom-switch">
-                              <input type="checkbox" class="custom-control-input" id="comestible_use_{{ $use }}" name="comestible_use[]" value="{{ $use }}" @if(!is_null($species->comestible_use) && in_array($use, $species->comestible_use)) CHECKED @endif>
-                              <label class="custom-control-label" for="comestible_use_{{ $use }}">{{ ucfirst($use) }}</label>
-                            </div>
-                            @endforeach
-
-                            @error('comestible_use')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <h5 class="card-title text-md-center">Ornemental</h5>
-
-                    <div class="form-group row">
-                        <label for="flowering_period" class="col-md-3 col-form-label text-md-right">{{ __('Flowering period') }}</label>
-
-                        <div class="col-md-6">
-                            @foreach(App\Species::FLOWERING_PERIODS as $key => $period)
-                            <div class="custom-control custom-switch">
-                              <input type="checkbox" class="custom-control-input" id="flowering_period_{{ $period }}" name="flowering_period[]" value="{{ $period }}" @if(!is_null($species->flowering_period) && in_array($period, $species->flowering_period)) CHECKED @endif>
-                              <label class="custom-control-label" for="flowering_period_{{ $period }}">{{ ucfirst($period) }}</label>
-                            </div>
-                            @endforeach
-
-                            @error('flowering_period')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="flowering_color" class="col-md-3 col-form-label text-md-right">{{ __('Flowering color') }}</label>
-
-                        <div class="col-md-6">
-                            @foreach(App\Species::FLOWERING_COLORS as $key => $color)
-                            <div class="custom-control custom-switch">
-                              <input type="checkbox" class="custom-control-input" id="flowering_color_{{ $color }}" name="flowering_color[]" value="{{ $color }}" @if(!is_null($species->flowering_color) && in_array($color, $species->flowering_color)) CHECKED @endif>
-                              <label class="custom-control-label" for="flowering_color_{{ $color }}">{{ ucfirst($color) }}</label>
-                            </div>
-                            @endforeach
-
-                            @error('flowering_color')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="foliage_color" class="col-md-3 col-form-label text-md-right">{{ __('Foliage color') }}</label>
-
-                        <div class="col-md-6">
-                            @foreach(App\Species::FOLIAGE_COLORS as $key => $color)
-                            <div class="custom-control custom-switch">
-                              <input type="checkbox" class="custom-control-input" id="foliage_color_{{ $color }}" name="foliage_color[]" value="{{ $color }}" @if(!is_null($species->foliage_color) && in_array($color, $species->foliage_color)) CHECKED @endif>
-                              <label class="custom-control-label" for="foliage_color_{{ $color }}">{{ ucfirst($color) }}</label>
-                            </div>
-                            @endforeach
-
-                            @error('foliage_color')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="post_summer_appeal" class="col-md-3 col-form-label text-md-right">{{ __('Post summer appeal') }}</label>
-
-                        <div class="col-md-6">
-                            @foreach(App\Species::POST_SUMMER_APPEALS as $key => $season)
-                            <div class="custom-control custom-switch">
-                              <input type="checkbox" class="custom-control-input" id="post_summer_appeal_{{ $season }}" name="post_summer_appeal[]" value="{{ $season }}" @if(!is_null($species->post_summer_appeal) && in_array($season, $species->post_summer_appeal)) CHECKED @endif>
-                              <label class="custom-control-label" for="post_summer_appeal_{{ $season }}">{{ ucfirst($season) }}</label>
-                            </div>
-                            @endforeach
-
-                            @error('post_summer_appeal')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <h5 class="card-title text-md-center">Horticulture</h5>
-
-                    <div class="form-group row">
-                        <label for="growth" class="col-md-3 col-form-label text-md-right">{{ __('Growth') }}</label>
-
-                        <div class="col-md-6">
-                            @foreach(App\Species::GROWTH_SPEEDS as $key => $speed)
-                            <div class="custom-control custom-switch">
-                              <input type="checkbox" class="custom-control-input" id="growth_{{ $speed }}" name="growth[]" value="{{ $speed }}" @if(!is_null($species->growth) && in_array($speed, $species->growth)) CHECKED @endif>
-                              <label class="custom-control-label" for="growth_{{ $speed }}">{{ ucfirst($speed) }}</label>
-                            </div>
-                            @endforeach
-
-                            @error('flowering_period')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="pruning_period" class="col-md-3 col-form-label text-md-right">{{ __('Pruning period') }}</label>
-
-                        <div class="col-md-6">
-                            @foreach(App\Species::PRUNING_PERIODS as $key => $period)
-                            <div class="custom-control custom-switch">
-                              <input type="checkbox" class="custom-control-input" id="pruning_period_{{ $period }}" name="pruning_period[]" value="{{ $period }}" @if(!is_null($species->pruning_period) && in_array($period, $species->pruning_period)) CHECKED @endif>
-                              <label class="custom-control-label" for="pruning_period_{{ $period }}">{{ ucfirst($period) }}</label>
-                            </div>
-                            @endforeach
-
-                            @error('pruning_period')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="multiplication" class="col-md-3 col-form-label text-md-right">{{ __('Multiplication') }}</label>
-
-                        <div class="col-md-6">
-                            @foreach(App\Species::MULTIPLICATIONS as $key => $method)
-                            <div class="custom-control custom-switch">
-                              <input type="checkbox" class="custom-control-input" id="multiplication_{{ $method }}" name="multiplication[]" value="{{ $method }}" @if(!is_null($species->multiplication) && in_array($method, $species->multiplication)) CHECKED @endif>
-                              <label class="custom-control-label" for="multiplication_{{ $method }}">{{ ucfirst($method) }}</label>
-                            </div>
-                            @endforeach
-
-                            @error('multiplication')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="disadvantages" class="col-md-3 col-form-label text-md-right">{{ __('Disadvantages') }}</label>
-
-                        <div class="col-md-6">
-                            @foreach(App\Species::DISADVANTAGES as $key => $reason)
-                            <div class="custom-control custom-switch">
-                              <input type="checkbox" class="custom-control-input" id="disadvantages_{{ $reason }}" name="disadvantages[]" value="{{ $reason }}" @if(!is_null($species->disadvantages) && in_array($reason, $species->disadvantages)) CHECKED @endif>
-                              <label class="custom-control-label" for="disadvantages_{{ $reason }}">{{ ucfirst($reason) }}</label>
-                            </div>
-                            @endforeach
-
-                            @error('disadvantages')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-sm btn-primary">
-                            {{ __('Update') }}
-                        </button>
-                    </div>
-                </form>
-            </div>
+            </form>
         </div>
     </div>
 </div>
