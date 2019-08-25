@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4a6b8c17cad55db9ccaf61c8239a4b5e",
+    "content-hash": "365f1577782cd85cf043ef1cce2c4232",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -610,6 +610,51 @@
             "time": "2018-09-29T18:48:56+00:00"
         },
         {
+            "name": "joedixon/laravel-translation",
+            "version": "v0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/joedixon/laravel-translation.git",
+                "reference": "6850c0ac4417b5f900d1cfdad3f5c650ce3844a1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/joedixon/laravel-translation/zipball/6850c0ac4417b5f900d1cfdad3f5c650ce3844a1",
+                "reference": "6850c0ac4417b5f900d1cfdad3f5c650ce3844a1",
+                "shasum": ""
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0.0",
+                "orchestra/testbench": "^3.6",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "JoeDixon\\Translation\\TranslationServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JoeDixon\\Translation\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joe Dixon",
+                    "email": "hello@joedixon.co.uk"
+                }
+            ],
+            "description": "A tool for managing all of your Laravel translations",
+            "time": "2019-06-23T13:50:08+00:00"
+        },
+        {
             "name": "laravel/framework",
             "version": "v5.8.33",
             "source": {
@@ -1025,6 +1070,64 @@
                 "processing"
             ],
             "time": "2019-04-03T23:46:42+00:00"
+        },
+        {
+            "name": "lykegenes/laravel-locale-switcher",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Lykegenes/laravel-locale-switcher.git",
+                "reference": "919164a34005bdc3ac8e55140515c890d6df26a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Lykegenes/laravel-locale-switcher/zipball/919164a34005bdc3ac8e55140515c890d6df26a6",
+                "reference": "919164a34005bdc3ac8e55140515c890d6df26a6",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/http": "~5.1",
+                "illuminate/support": "~5.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "~1.1",
+                "orchestra/testbench": "~3.5",
+                "php-coveralls/php-coveralls": "~1.0",
+                "phpunit/phpunit": "~6.0 || ~7.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lykegenes\\LocaleSwitcher\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Patrick Samson",
+                    "email": "patricksamson236@gmail.com"
+                }
+            ],
+            "description": "A Laravel locale switcher Middleware",
+            "homepage": "https://github.com/Lykegenes/laravel-locale-switcher",
+            "keywords": [
+                "laravel",
+                "locale",
+                "middleware",
+                "switcher"
+            ],
+            "time": "2019-02-12T16:25:43+00:00"
         },
         {
             "name": "maennchen/zipstream-php",
