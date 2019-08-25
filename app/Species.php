@@ -12,7 +12,7 @@ class Species extends Model
     const HARDINESS_CA = ['0', '0a', '0b', '1', '1a', '1b', '2', '2a', '2b', '3', '3a', '3b', '4', '4a', '4b', '5', '5a', '5b', '6', '6a', '6b', '7', '7a', '7b', '8', '8a', '8b', '9', '9a', '9b'];
     const SUN = ['full', 'partial', 'shade'];
     const WATER = [1, 2, 3, 4, 5];
-    const SOIL = ['light', 'mid', 'heavy', 'aqua'];
+    const SOIL = ['light', 'medium', 'heavy', 'aqua'];
     const SHAPES = ['tree', 'shrub', 'herbaceous', 'vine'];
     const ROOTS = ['bulb', 'fleshy', 'basal', 'fasciculated', 'lateral', 'rotating', 'rhizome', 'superficial', 'tuber'];
     const WILDLIFE_USES = ['food', 'shelter'];

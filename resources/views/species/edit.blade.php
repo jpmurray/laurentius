@@ -148,7 +148,7 @@
                                     </div>
 
                                     <div class="custom-control custom-switch">
-                                      <input type="checkbox" class="custom-control-input" id="soil_medium" name="soil[]" value="mid" @if(!is_null($species->soil) && in_array('mid',$species->soil)) CHECKED @endif>
+                                      <input type="checkbox" class="custom-control-input" id="soil_medium" name="soil[]" value="medium" @if(!is_null($species->soil) && in_array('medium',$species->soil)) CHECKED @endif>
                                       <label class="custom-control-label" for="soil_medium">Medium</label>
                                     </div>
 

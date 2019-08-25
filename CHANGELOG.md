@@ -3,6 +3,7 @@
 # Next
 - Fix comestible usage information on show page.
 - Changed layout of _species_ create and edit pages.
+- Uniformized term "mid" to "medium" in soil constant of _species_.
 
 # 0.3.0 - Pre-release (2019-08-24)
 
