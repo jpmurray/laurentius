@@ -671,7 +671,7 @@
                     <div class="card-header">Others</div>
                     <div class="card-body">
                         <div class="form-group row">
-                            <label for="interesting_cultivar" class="col-md-3 col-form-label text-md-right">{{ __('Interesting cultivars') }} *</label>
+                            <label for="interesting_cultivar" class="col-md-3 col-form-label text-md-right">{{ __('Interesting cultivars') }}</label>
 
                             <div class="col-md-6">
                                 <input id="interesting_cultivar" type="text" class="form-control @error('interesting_cultivar') is-invalid @enderror" name="interesting_cultivar" value="{{ old('interesting_cultivar') }}" autofocus>
@@ -679,6 +679,20 @@
                                 <span class="form-text">Separate each cultivar with comas,<br>ex: <code>a cool cultivar,cultivar1,another cultivar</code></span>
 
                                 @error('interesting_cultivar')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="maintainers_note" class="col-md-3 col-form-label text-md-right">{{ __('Maintainer\'s notes') }}</label>
+
+                            <div class="col-md-6">
+                                <textarea class="form-control" name="maintainers_note" id="maintainers_note" rows="3"></textarea>
+
+                                @error('maintainers_note')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

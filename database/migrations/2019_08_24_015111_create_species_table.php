@@ -47,6 +47,7 @@ class CreateSpeciesTable extends Migration
             $table->json('multiplication')->nullable();
             $table->json('disadvantages')->nullable();
             $table->json('interesting_cultivar')->nullable();
+            $table->longText('maintainers_note')->nullable();
             $table->timestamps();
         });
     }

@@ -158,7 +158,7 @@
 				</div>
 			</div>
 
-			<div class="card">
+			<div class="card mb-3">
 			  <h5 class="card-header">Functions</h5>
 			  <div class="card-body">
 			    <p class="card-text"><strong>Nitrogen fixer</strong>:
@@ -193,6 +193,14 @@
 			    </p>
 			  </div>
 			</div>
+
+			@if(!empty($species->maintainers_note))
+			<div class="card mb-3">
+			  <h5 class="card-header">Database maintainers' notes</h5>
+			  <div class="card-body">
+			    {!! $species->maintainers_note !!}
+			</div>
+			@endif
         </div>
     </div>
 </div>

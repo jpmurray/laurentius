@@ -28,7 +28,7 @@ class Species extends Model
     const MULTIPLICATIONS = ['unknown', 'cuttings', 'cuttings (spring)', 'cuttings (fall)', 'division', 'division (spring)', 'division (fall)', 'seedling', 'seedling (spring)', 'seedling (fall)', 'graft', 'graft (spring)', 'graft (fall)', 'stolon', 'stolon (spring)', 'stolon (fall)'];
     const DISADVANTAGES = ['none', 'expansive', 'dispersive', 'allergen', 'poison', 'thorny'];
 
-    protected $fillable = ['name', 'name_en', 'name_fr', 'hardiness_ca', 'sun', 'soil', 'water', 'ph_min', 'ph_max', 'shape', 'root', 'maturity_height_meters', 'maturity_width_meters', 'nitrogen_fixer', 'nutrient_accumulator', 'ground_cover', 'hedge', 'wildlife_use', 'ecological_use', 'pollinating_type', 'comestible_use', 'medicinal_use', 'flowering_period', 'flowering_color', 'foliage_color', 'post_summer_appeal', 'growth', 'pruning_period', 'multiplication', 'disadvantages', 'interesting_cultivar'];
+    protected $fillable = ['name', 'name_en', 'name_fr', 'hardiness_ca', 'sun', 'soil', 'water', 'ph_min', 'ph_max', 'shape', 'root', 'maturity_height_meters', 'maturity_width_meters', 'nitrogen_fixer', 'nutrient_accumulator', 'ground_cover', 'hedge', 'wildlife_use', 'ecological_use', 'pollinating_type', 'comestible_use', 'medicinal_use', 'flowering_period', 'flowering_color', 'foliage_color', 'post_summer_appeal', 'growth', 'pruning_period', 'multiplication', 'disadvantages', 'interesting_cultivar', 'maintainers_note'];
 
     protected $casts = [
         'sun' => 'json',

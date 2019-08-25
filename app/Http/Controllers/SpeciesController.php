@@ -86,6 +86,7 @@ class SpeciesController extends Controller
             'multiplication' => ['nullable', new Multiplication],
             'disadvantages' => ['nullable', new Disadvantages],
             'interesting_cultivar' => 'nullable',
+            'maintainers_note' => 'nullable',
         ]);
 
         $validatedData['interesting_cultivar'] = !isset($validatedData['interesting_cultivar']) ? null : explode(',', $validatedData['interesting_cultivar']);
@@ -153,6 +154,7 @@ class SpeciesController extends Controller
             'medicinal_use' => 'nullable|boolean',
             'comestible_use' => ['nullable', new ComestibleUse],
             'interesting_cultivar' => 'nullable',
+            'maintainers_note' => 'nullable',
         ]);
 
         $validatedData['sun'] = !isset($validatedData['sun']) ? null : $validatedData['sun'];
