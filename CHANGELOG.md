@@ -2,6 +2,7 @@
 
 # Next
 - Fix comestible usage information on show page.
+- Changed layout of _species_ create and edit pages.
 
 # 0.3.0 - Pre-release (2019-08-24)
 
