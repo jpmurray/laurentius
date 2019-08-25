@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Create a new ordo</div>
+                <div class="card-header">{!! __('Create a new <em>ordo</em>') !!}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('ordos.store') }}">

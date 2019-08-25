@@ -5,11 +5,11 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Create a new regnum</div>
+                <div class="card-header">{!! __('Create a new <em>regnum</em>') !!}</div>
 
                 <div class="card-body">
                     <div class="alert alert-warning" role="alert">
-                        <strong>Heads up!</strong> Regnums (kingdoms) are pretty standardized. Do you really want to create a new one?
+                        {!! __('<strong>Heads up!</strong> <em>Regnums</em> (kingdoms) are pretty standardized. Do you really want to create a new one?') !!}
                     </div>
 
                     <form method="POST" action="{{ route('regnums.store') }}">

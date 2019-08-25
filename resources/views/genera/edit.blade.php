@@ -11,7 +11,7 @@
             @endif
             
             <div class="card">
-                <div class="card-header">Edit genus {{ $genus->name }}</div>
+                <div class="card-header">{{ __('Edit :name', ['name' => $genus->name]) }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('genera.update', $genus) }}">

@@ -11,7 +11,7 @@
             @endif
             
             <div class="card">
-                <div class="card-header">Edit classis {{ $classis->name }}</div>
+                <div class="card-header">{{ __('Edit :name', ['name' => $classis->name]) }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('classes.update', $classis) }}">

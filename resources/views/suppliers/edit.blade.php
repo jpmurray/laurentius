@@ -11,7 +11,7 @@
             @endif
             
             <div class="card">
-                <div class="card-header">Edit {{ $supplier->name }}</div>
+                <div class="card-header">{{ __('Edit :name', ['name' => $supplier->name]) }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('suppliers.update', $supplier) }}">
