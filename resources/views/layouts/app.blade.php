@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<script src="https://kit.fontawesome.com/f3c2c1b87f.js"></script><script src="https://kit.fontawesome.com/f3c2c1b87f.js"></script><!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -15,6 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f3c2c1b87f.js"></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

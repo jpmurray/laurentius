@@ -106,7 +106,7 @@ class SpeciesController extends Controller
      */
     public function show(Species $species)
     {
-        //
+        return view('species.show')->with(['species' => $species]);
     }
 
     /**

@@ -26,7 +26,7 @@
 					    <tr>
 					      <th scope="row">{{ $species->name }}</th>
 					      <td>
-					      	<a href="{{ route('species.edit', $species) }}" class="btn btn-link btn-sm">Edit</a>
+							<a href="{{ route('species.edit', $species) }}" class="btn btn-link btn-sm">Edit</a>
 
 					      	<a href="{{ route('species.destroy', $species) }}" class="btn btn-link btn-sm" onclick="event.preventDefault();
                                  document.getElementById('delete-species-{{ $species->id }}').submit();">Delete</a>
@@ -35,6 +35,7 @@
 			                    @csrf
 			                    @method('DELETE')
 			                </form>
+			                <a href="{{ route('species.show', $species) }}" class="btn btn-link btn-sm">Show</a>
 					      </td>
 					    </tr>
 					    @endforeach

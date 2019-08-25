@@ -25,10 +25,8 @@
             <a class="dropdown-item" href="{{ route("genera.index") }}">
             	Genera
             </a>
-            <a class="dropdown-item" href="{{ route("species.index") }}">
-            	Species
-            </a>
         </div>
     </li>
+    <a class="nav-link" href="{{ route("species.index") }}">Manage species</a>
     {{-- <a class="nav-link" href="{{ route("settings") }}">Settings</a> --}}
 </ul>
