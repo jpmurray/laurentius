@@ -1,6 +1,6 @@
 # Changelog
 
-# Next
+# 0.5.0 - Pre-release (2019-08-25)
 - Fixed some create / edit form quirkness.
 - Database fields changed for a couple of _species_ fields to better show current usage.
 - Ability to add interesting cultivars to a species.
