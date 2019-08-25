@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Genus;
 use App\Rules\ComestibleUse;
 use App\Rules\EcologicalUse;
+use App\Rules\FloweringColor;
+use App\Rules\FloweringPeriod;
+use App\Rules\FoliageColor;
 use App\Rules\HardinessCa;
 use App\Rules\PollinatingType;
+use App\Rules\PostSummerAppeal;
 use App\Rules\Root;
 use App\Rules\Shape;
 use App\Rules\Soil;
@@ -70,6 +74,10 @@ class SpeciesController extends Controller
             'pollinating_type' => ['nullable', new PollinatingType],
             'medicinal_use' => 'nullable|boolean',
             'comestible_use' => ['nullable', new ComestibleUse],
+            'flowering_period' => ['nullable', new FloweringPeriod],
+            'flowering_color' => ['nullable', new FloweringColor],
+            'foliage_color' => ['nullable', new FoliageColor],
+            'post_summer_appeal' => ['nullable', new PostSummerAppeal],
         ]);
 
         if ($validatedData['hardiness_ca'] == "null") {

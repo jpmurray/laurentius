@@ -16,8 +16,12 @@ class Species extends Model
     const POLLINATING_TYPES = ['specialist', 'generalist'];
     const ECOLOGICAL_USES = ['riparian', 'slope', 'flood'];
     const COMESTIBLE_USES = ['flower', 'fruit', 'leave', 'nut', 'seed', 'root'];
+    const FLOWERING_PERIODS = ['spring', 'summer', 'fall'];
+    const FLOWERING_COLORS = ['red', 'rose', 'white', 'yellow', 'orange', 'purple'];
+    const FOLIAGE_COLORS = ['gree', 'pale', 'dark', 'purple'];
+    const POST_SUMMER_APPEALS = ['fall', 'winter'];
 
-    protected $fillable = ['name', 'name_en', 'name_fr', 'hardiness_ca', 'sun', 'soil', 'water', 'ph_min', 'ph_max', 'shape', 'root', 'maturity_height_meters', 'maturity_width_meters', 'nitrogen_fixer', 'nutrient_accumulator', 'ground_cover', 'hedge', 'wildlife_use', 'ecological_use', 'pollinating_type', 'comestible_use', 'medicinal_use'];
+    protected $fillable = ['name', 'name_en', 'name_fr', 'hardiness_ca', 'sun', 'soil', 'water', 'ph_min', 'ph_max', 'shape', 'root', 'maturity_height_meters', 'maturity_width_meters', 'nitrogen_fixer', 'nutrient_accumulator', 'ground_cover', 'hedge', 'wildlife_use', 'ecological_use', 'pollinating_type', 'comestible_use', 'medicinal_use', 'flowering_period', 'flowering_color', 'foliage_color', 'post_summer_appeal'];
 
     protected $casts = [
         'sun' => 'json',
@@ -28,6 +32,10 @@ class Species extends Model
         'ecological_use' => 'json',
         'pollinating_type' => 'json',
         'comestible_use' => 'json',
+        'flowering_period' => 'json',
+        'flowering_color' => 'json',
+        'foliage_color' => 'json',
+        'post_summer_appeal' => 'json',
         'medicinal_use' => 'boolean',
         'nitrogen_fixer' => 'boolean',
         'nutrient_accumulator' => 'boolean',

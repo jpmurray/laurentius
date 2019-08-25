@@ -468,6 +468,84 @@
                         </div>
                     </div>
 
+                    <h5 class="card-title text-md-center">Ornemental</h5>
+
+                    <div class="form-group row">
+                        <label for="flowering_period" class="col-md-3 col-form-label text-md-right">{{ __('Flowering period') }}</label>
+
+                        <div class="col-md-6">
+                            @foreach(App\Species::FLOWERING_PERIODS as $key => $period)
+                            <div class="custom-control custom-switch">
+                              <input type="checkbox" class="custom-control-input" id="flowering_period_{{ $period }}" name="flowering_period[]" value="{{ $period }}">
+                              <label class="custom-control-label" for="flowering_period_{{ $period }}">{{ ucfirst($period) }}</label>
+                            </div>
+                            @endforeach
+
+                            @error('flowering_period')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="flowering_color" class="col-md-3 col-form-label text-md-right">{{ __('Flowering color') }}</label>
+
+                        <div class="col-md-6">
+                            @foreach(App\Species::FLOWERING_COLORS as $key => $color)
+                            <div class="custom-control custom-switch">
+                              <input type="checkbox" class="custom-control-input" id="flowering_color_{{ $color }}" name="flowering_color[]" value="{{ $color }}">
+                              <label class="custom-control-label" for="flowering_color_{{ $color }}">{{ ucfirst($color) }}</label>
+                            </div>
+                            @endforeach
+
+                            @error('flowering_color')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="foliage_color" class="col-md-3 col-form-label text-md-right">{{ __('Foliage color') }}</label>
+
+                        <div class="col-md-6">
+                            @foreach(App\Species::FOLIAGE_COLORS as $key => $color)
+                            <div class="custom-control custom-switch">
+                              <input type="checkbox" class="custom-control-input" id="foliage_color_{{ $color }}" name="foliage_color[]" value="{{ $color }}">
+                              <label class="custom-control-label" for="foliage_color_{{ $color }}">{{ ucfirst($color) }}</label>
+                            </div>
+                            @endforeach
+
+                            @error('foliage_color')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="post_summer_appeal" class="col-md-3 col-form-label text-md-right">{{ __('Post summer appeal') }}</label>
+
+                        <div class="col-md-6">
+                            @foreach(App\Species::POST_SUMMER_APPEALS as $key => $season)
+                            <div class="custom-control custom-switch">
+                              <input type="checkbox" class="custom-control-input" id="post_summer_appeal_{{ $season }}" name="post_summer_appeal[]" value="{{ $season }}">
+                              <label class="custom-control-label" for="post_summer_appeal_{{ $season }}">{{ ucfirst($season) }}</label>
+                            </div>
+                            @endforeach
+
+                            @error('post_summer_appeal')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
                     <div class="card-footer">
                         <button type="submit" class="btn btn-sm btn-primary">
                             {{ __('Add') }}
