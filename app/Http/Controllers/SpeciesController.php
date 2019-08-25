@@ -53,7 +53,6 @@ class SpeciesController extends Controller
      */
     public function store(Request $request)
     {
-
         $validatedData = $request->validate([
             'name' => 'required|unique:species',
             'name_fr' => 'required',
@@ -86,11 +85,10 @@ class SpeciesController extends Controller
             'pruning_period' => ['nullable', new PruningPeriod],
             'multiplication' => ['nullable', new Multiplication],
             'disadvantages' => ['nullable', new Disadvantages],
+            'interesting_cultivar' => 'nullable',
         ]);
 
-        if ($validatedData['hardiness_ca'] == "null") {
-            unset($validatedData['hardiness_ca']);
-        }
+        $validatedData['interesting_cultivar'] = !isset($validatedData['interesting_cultivar']) ? null : explode(',', $validatedData['interesting_cultivar']);
 
         $genus = Genus::find($validatedData['genus']);
         $genus->species()->create($validatedData);
@@ -154,6 +152,7 @@ class SpeciesController extends Controller
             'pollinating_type' => ['nullable', new PollinatingType],
             'medicinal_use' => 'nullable|boolean',
             'comestible_use' => ['nullable', new ComestibleUse],
+            'interesting_cultivar' => 'nullable',
         ]);
 
         $validatedData['sun'] = !isset($validatedData['sun']) ? null : $validatedData['sun'];
@@ -165,6 +164,7 @@ class SpeciesController extends Controller
         $validatedData['ecological_use'] = !isset($validatedData['ecological_use']) ? null : $validatedData['ecological_use'];
         $validatedData['pollinating_type'] = !isset($validatedData['pollinating_type']) ? null : $validatedData['pollinating_type'];
         $validatedData['comestible_use'] = !isset($validatedData['comestible_use']) ? null : $validatedData['comestible_use'];
+        $validatedData['interesting_cultivar'] = !isset($validatedData['interesting_cultivar']) ? null : explode(',', $validatedData['interesting_cultivar']);
         
 
         $species->update($validatedData);

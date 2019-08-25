@@ -3,6 +3,7 @@
 # Next
 - Fixed some create / edit form quirkness.
 - Database fields changed for a couple of _species_ fields to better show current usage.
+- Ability to add interesting cultivars to a species.
 
 # 0.4.0 - Pre-release (2019-08-25)
 - Fix comestible usage information on show page.

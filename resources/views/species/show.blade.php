@@ -24,6 +24,11 @@
 			        <p class="card-text">
 			        	FR: {{ $species->name_fr }}<br>
 			        	EN: {{ $species->name_en }}<br>
+			        </p>
+			        <p class="card-text">
+			        	<strong>Interesting cultivars:</strong> {{ implode(', ', $species->interesting_cultivar) }}
+			        </p>
+			        <p class="card-text">
 			        	<small class="text-muted">Dernière mise à jour: {{ $species->updated_at->tz("America/Montreal") }}</small>
 			        </p>
 			      </div>
