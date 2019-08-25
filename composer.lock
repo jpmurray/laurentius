@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f6abf2d6857d033e58af0e923d13797c",
+    "content-hash": "365f1577782cd85cf043ef1cce2c4232",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1070,6 +1070,64 @@
                 "processing"
             ],
             "time": "2019-04-03T23:46:42+00:00"
+        },
+        {
+            "name": "lykegenes/laravel-locale-switcher",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Lykegenes/laravel-locale-switcher.git",
+                "reference": "919164a34005bdc3ac8e55140515c890d6df26a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Lykegenes/laravel-locale-switcher/zipball/919164a34005bdc3ac8e55140515c890d6df26a6",
+                "reference": "919164a34005bdc3ac8e55140515c890d6df26a6",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/http": "~5.1",
+                "illuminate/support": "~5.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "~1.1",
+                "orchestra/testbench": "~3.5",
+                "php-coveralls/php-coveralls": "~1.0",
+                "phpunit/phpunit": "~6.0 || ~7.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lykegenes\\LocaleSwitcher\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Patrick Samson",
+                    "email": "patricksamson236@gmail.com"
+                }
+            ],
+            "description": "A Laravel locale switcher Middleware",
+            "homepage": "https://github.com/Lykegenes/laravel-locale-switcher",
+            "keywords": [
+                "laravel",
+                "locale",
+                "middleware",
+                "switcher"
+            ],
+            "time": "2019-02-12T16:25:43+00:00"
         },
         {
             "name": "maennchen/zipstream-php",

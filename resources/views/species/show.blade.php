@@ -198,7 +198,7 @@
 
 				@if($species->suppliers->isNotEmpty())
 				<div class="card">
-			  		<h5 class="card-header">Suppliers</h5>
+			  		<h5 class="card-header">{{ __('Suppliers') }}</h5>
 
 					<div class="card-body">
 						<ul>
