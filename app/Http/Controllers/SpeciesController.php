@@ -3,9 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Genus;
+use App\Rules\ComestibleUse;
+use App\Rules\Disadvantages;
 use App\Rules\EcologicalUse;
+use App\Rules\FloweringColor;
+use App\Rules\FloweringPeriod;
+use App\Rules\FoliageColor;
+use App\Rules\Growth;
 use App\Rules\HardinessCa;
+use App\Rules\Multiplication;
 use App\Rules\PollinatingType;
+use App\Rules\PostSummerAppeal;
+use App\Rules\PruningPeriod;
 use App\Rules\Root;
 use App\Rules\Shape;
 use App\Rules\Soil;
@@ -67,6 +76,16 @@ class SpeciesController extends Controller
             'wildlife_use' => ['nullable', new WildlifeUse],
             'ecological_use' => ['nullable', new EcologicalUse],
             'pollinating_type' => ['nullable', new PollinatingType],
+            'medicinal_use' => 'nullable|boolean',
+            'comestible_use' => ['nullable', new ComestibleUse],
+            'flowering_period' => ['nullable', new FloweringPeriod],
+            'flowering_color' => ['nullable', new FloweringColor],
+            'foliage_color' => ['nullable', new FoliageColor],
+            'post_summer_appeal' => ['nullable', new PostSummerAppeal],
+            'growth' => ['nullable', new Growth],
+            'pruning_period' => ['nullable', new PruningPeriod],
+            'multiplication' => ['nullable', new Multiplication],
+            'disadvantages' => ['nullable', new Disadvantages],
         ]);
 
         if ($validatedData['hardiness_ca'] == "null") {
@@ -87,7 +106,7 @@ class SpeciesController extends Controller
      */
     public function show(Species $species)
     {
-        //
+        return view('species.show')->with(['species' => $species]);
     }
 
     /**
@@ -133,6 +152,8 @@ class SpeciesController extends Controller
             'wildlife_use' => ['nullable', new WildlifeUse],
             'ecological_use' => ['nullable', new EcologicalUse],
             'pollinating_type' => ['nullable', new PollinatingType],
+            'medicinal_use' => 'nullable|boolean',
+            'comestible_use' => ['nullable', new ComestibleUse],
         ]);
 
         $validatedData['sun'] = !isset($validatedData['sun']) ? null : $validatedData['sun'];
@@ -143,6 +164,7 @@ class SpeciesController extends Controller
         $validatedData['wildlife_use'] = !isset($validatedData['wildlife_use']) ? null : $validatedData['wildlife_use'];
         $validatedData['ecological_use'] = !isset($validatedData['ecological_use']) ? null : $validatedData['ecological_use'];
         $validatedData['pollinating_type'] = !isset($validatedData['pollinating_type']) ? null : $validatedData['pollinating_type'];
+        $validatedData['comestible_use'] = !isset($validatedData['comestible_use']) ? null : $validatedData['comestible_use'];
         
 
         $species->update($validatedData);
