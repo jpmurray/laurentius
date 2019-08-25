@@ -676,7 +676,7 @@
                             <label for="maintainers_note" class="col-md-3 col-form-label text-md-right">{{ __('Maintainer\'s notes') }}</label>
 
                             <div class="col-md-6">
-                                <textarea class="form-control" name="maintainers_note" id="maintainers_note" rows="3">{!! $species->maintainers_note !!}</textarea>
+                                <textarea class="form-control" name="maintainers_note" id="maintainers-note" rows="3">{!! $species->maintainers_note !!}</textarea>
 
                                 @error('maintainers_note')
                                     <span class="invalid-feedback" role="alert">
@@ -698,4 +698,10 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('more-header')
+@endsection
+
+@section('more-bottom')
 @endsection

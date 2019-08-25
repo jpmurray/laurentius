@@ -19,6 +19,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Additionnal js and styles? -->
+    @yield('more-header')
 </head>
 <body>
     <div id="app">
@@ -42,5 +45,7 @@
             @yield('content')
         </main>
     </div>
+    <!-- Additionnal js and styles? -->
+    @yield('more-bottom')
 </body>
 </html>
