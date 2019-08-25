@@ -1,5 +1,8 @@
 # Changelog
 
+# Next
+- Fixed some create / edit form quirkness.
+
 # 0.4.0 - Pre-release (2019-08-25)
 - Fix comestible usage information on show page.
 - Changed layout of _species_ create and edit pages.
