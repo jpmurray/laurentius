@@ -701,7 +701,23 @@
 @endsection
 
 @section('more-header')
+<!-- include summernote css/js -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
 @endsection
 
 @section('more-bottom')
+<script type="text/javascript">
+    $(document).ready(function() {
+      $('#maintainers-note') .summernote({
+        height: 300,
+        toolbar: [
+            // [groupName, [list of button]]
+            ['insert', ['link']],
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['para', ['ul', 'ol']],
+          ]
+      });
+    });
+</script>
 @endsection

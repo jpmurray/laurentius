@@ -137,7 +137,7 @@ class SpeciesController extends Controller
             'hardiness_ca' => ['nullable', new HardinessCa],
             'sun' => ['nullable', new Sun],
             'soil' => ['nullable', new Soil],
-            'water' => 'digits_between:1,5|nullable',
+            'water' => 'nullable',
             'ph_min' => 'numeric|nullable',
             'ph_max' => 'numeric|nullable',
             'shape' => ['nullable', new Shape],
