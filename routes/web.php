@@ -25,6 +25,7 @@ Route::resource('ordos', 'OrdoController');
 Route::resource('familias', 'FamiliaController');
 Route::resource('genera', 'GenusController');
 Route::resource('species', 'SpeciesController');
+Route::resource('suppliers', 'SupplierController');
 
 // using route::resource resulted in weird model binding to controller.
 // reverted to manually creating routes.

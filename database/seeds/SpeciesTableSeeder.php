@@ -47,7 +47,8 @@ class SpeciesTableSeeder extends Seeder
             'growth' => ['fast'],
             'pruning_period' => ['none'],
             'multiplication' => ['cuttings (spring)'],
-            'disadvantages' => ['expansive']
+            'disadvantages' => ['expansive'],
+            'maintainers_note' => '<p>On peut faire bien des affaires!</p><p><b>Disons, une sous section avec un titre en bold..</b></p><ul><li><b>Pour y mettre une liste...</b></li><li><b><a href="http://google.com" target="_blank">Et des liens?</a></b></li></ul>'
         ]);
     }
 }

@@ -131,8 +131,8 @@
                                         <div class="custom-control custom-switch">
                                             <input
                                             @if($soil == "unknown") CHECKED @endif
-                                            type="checkbox" class="custom-control-input" id="sun_{{ $soil }}" name="sun[]" value="{{ $soil }}">
-                                            <label class="custom-control-label" for="sun_{{ $soil }}">{{ ucfirst($soil) }}</label>
+                                            type="checkbox" class="custom-control-input" id="soil_{{ $soil }}" name="soil[]" value="{{ $soil }}">
+                                            <label class="custom-control-label" for="soil_{{ $soil }}">{{ ucfirst($soil) }}</label>
                                         </div>
                                     @endforeach
 
@@ -152,8 +152,8 @@
                                         <div class="form-check form-check-inline">
                                             <input
                                             @if($water == "unknown") CHECKED @endif
-                                            class="form-check-input" type="radio" id="sun_{{ $water }}" name="water" value="{{ $water }}">
-                                            <label class="form-check-label" for="sun_{{ $water }}">{{ ucfirst($water) }}</label>
+                                            class="form-check-input" type="radio" id="water_{{ $water }}" name="water" value="{{ $water }}">
+                                            <label class="form-check-label" for="water_{{ $water }}">{{ ucfirst($water) }}</label>
                                         </div>
                                     @endforeach
 
@@ -345,7 +345,7 @@
                                       <label class="form-check-label" for="nitrogen_fixer_no">No</label>
                                     </div>
 
-                                    @error('soil')
+                                    @error('nitrogen_fixer')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -366,7 +366,7 @@
                                       <label class="form-check-label" for="nutrient_accumulator_no">No</label>
                                     </div>
 
-                                    @error('soil')
+                                    @error('nutrient_accumulator')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -387,7 +387,7 @@
                                       <label class="form-check-label" for="ground_cover_no">No</label>
                                     </div>
 
-                                    @error('soil')
+                                    @error('ground_cover')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -408,7 +408,7 @@
                                       <label class="form-check-label" for="hedge_no">No</label>
                                     </div>
 
-                                    @error('soil')
+                                    @error('hedge')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -593,7 +593,7 @@
                                     </div>
                                     @endforeach
 
-                                    @error('flowering_period')
+                                    @error('growth')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -664,6 +664,60 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header">Others</div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label for="interesting_cultivar" class="col-md-3 col-form-label text-md-right">{{ __('Interesting cultivars') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="interesting_cultivar" type="text" class="form-control @error('interesting_cultivar') is-invalid @enderror" name="interesting_cultivar" value="{{ old('interesting_cultivar') }}" autofocus>
+
+                                <span class="form-text">Separate each cultivar with comas,<br>ex: <code>a cool cultivar,cultivar1,another cultivar</code></span>
+
+                                @error('interesting_cultivar')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="maintainers_note" class="col-md-3 col-form-label text-md-right">{{ __('Maintainer\'s notes') }}</label>
+
+                            <div class="col-md-6">
+                                <textarea class="form-control" name="maintainers_note" id="maintainers_note" rows="3"></textarea>
+
+                                @error('maintainers_note')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                                <label for="suppliers" class="col-md-3 col-form-label text-md-right">{{ __('Suppliers') }}</label>
+
+                                <div class="col-md-6">
+                                    @foreach(App\Supplier::all() as $supplier)
+                                    <div class="custom-control custom-switch">
+                                      <input type="checkbox" class="custom-control-input" id="supplier_{{ $supplier->id }}" name="suppliers[]" value="{{ $supplier->id }}">
+                                      <label class="custom-control-label" for="supplier_{{ $supplier->id }}">{{ $supplier->name }}</label>
+                                    </div>
+                                    @endforeach
+
+                                    @error('suppliers')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
                     </div>
                 </div>
 

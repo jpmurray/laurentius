@@ -53,7 +53,6 @@ class SpeciesController extends Controller
      */
     public function store(Request $request)
     {
-
         $validatedData = $request->validate([
             'name' => 'required|unique:species',
             'name_fr' => 'required',
@@ -62,7 +61,7 @@ class SpeciesController extends Controller
             'hardiness_ca' => ['nullable', new HardinessCa],
             'sun' => ['nullable', new Sun],
             'soil' => ['nullable', new Soil],
-            'water' => 'digits_between:1,5|nullable',
+            'water' => 'nullable',
             'ph_min' => 'numeric|nullable',
             'ph_max' => 'numeric|nullable',
             'shape' => ['nullable', new Shape],
@@ -86,14 +85,16 @@ class SpeciesController extends Controller
             'pruning_period' => ['nullable', new PruningPeriod],
             'multiplication' => ['nullable', new Multiplication],
             'disadvantages' => ['nullable', new Disadvantages],
+            'interesting_cultivar' => 'nullable',
+            'maintainers_note' => 'nullable',
+            'suppliers' => 'nullable',
         ]);
 
-        if ($validatedData['hardiness_ca'] == "null") {
-            unset($validatedData['hardiness_ca']);
-        }
+        $validatedData['interesting_cultivar'] = !isset($validatedData['interesting_cultivar']) ? null : explode(',', $validatedData['interesting_cultivar']);
 
         $genus = Genus::find($validatedData['genus']);
-        $genus->species()->create($validatedData);
+        $species = $genus->species()->create($validatedData);
+        $species->suppliers()->sync($validatedData['suppliers']);
 
         return redirect()->route('species.index')->with('status', 'Added!');
     }
@@ -138,7 +139,7 @@ class SpeciesController extends Controller
             'hardiness_ca' => ['nullable', new HardinessCa],
             'sun' => ['nullable', new Sun],
             'soil' => ['nullable', new Soil],
-            'water' => 'digits_between:1,5|nullable',
+            'water' => 'nullable',
             'ph_min' => 'numeric|nullable',
             'ph_max' => 'numeric|nullable',
             'shape' => ['nullable', new Shape],
@@ -154,6 +155,9 @@ class SpeciesController extends Controller
             'pollinating_type' => ['nullable', new PollinatingType],
             'medicinal_use' => 'nullable|boolean',
             'comestible_use' => ['nullable', new ComestibleUse],
+            'interesting_cultivar' => 'nullable',
+            'maintainers_note' => 'nullable',
+            'suppliers' => 'nullable',
         ]);
 
         $validatedData['sun'] = !isset($validatedData['sun']) ? null : $validatedData['sun'];
@@ -165,9 +169,11 @@ class SpeciesController extends Controller
         $validatedData['ecological_use'] = !isset($validatedData['ecological_use']) ? null : $validatedData['ecological_use'];
         $validatedData['pollinating_type'] = !isset($validatedData['pollinating_type']) ? null : $validatedData['pollinating_type'];
         $validatedData['comestible_use'] = !isset($validatedData['comestible_use']) ? null : $validatedData['comestible_use'];
+        $validatedData['interesting_cultivar'] = !isset($validatedData['interesting_cultivar']) ? null : explode(',', $validatedData['interesting_cultivar']);
         
 
         $species->update($validatedData);
+        $species->suppliers()->sync($validatedData['suppliers']);
 
         return redirect()->route('species.edit', $species)->with('status', 'Updated!');
     }
