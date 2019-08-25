@@ -26,7 +26,11 @@ class HardinessCa implements Rule
      */
     public function passes($attribute, $value)
     {
-        return in_array($value, Species::HARDINESS_CA) || $value == "null" ;
+        if (!in_array($value, Species::HARDINESS_CA)) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
