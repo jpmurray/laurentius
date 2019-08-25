@@ -12,7 +12,15 @@
 
             <div class="card text-white bg-info mb-3">
                 <div class="card-body">
-                    Here you can edit known informations about {{ $species->binominal_name }}. <strong>Mandatory fields are marked with an asterisk (*).</strong>
+                    <div class="row">
+                        <div class="col-md-11">
+                            Here you can edit known informations about {{ $species->binominal_name }}. <strong>Mandatory fields are marked with an asterisk (*).</strong>
+                        </div>
+                        <div class="col-md-1">
+                            <a class="text-white" href="{{ route('species.show', $species) }}" target="_blank"><i style="font-size: 1.5em;" class="far fa-eye"></i></a>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
             
