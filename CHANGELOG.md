@@ -1,6 +1,6 @@
 # Changelog
 
-# NEXT
+# 0.3.0 - Pre-release (2019-08-24)
 
 - Can add additional informations to _species_: uses, ornemental, horticulture.
 - Page to show species informations.
