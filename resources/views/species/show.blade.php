@@ -25,9 +25,11 @@
 			        	FR: {{ $species->name_fr }}<br>
 			        	EN: {{ $species->name_en }}<br>
 			        </p>
+			        @if(!empty($species->interesting_cultivar))
 			        <p class="card-text">
 			        	<strong>Interesting cultivars:</strong> {{ implode(', ', $species->interesting_cultivar) }}
 			        </p>
+			        @endif
 			        <p class="card-text">
 			        	<small class="text-muted">Dernière mise à jour: {{ $species->updated_at->tz("America/Montreal") }}</small>
 			        </p>
@@ -79,14 +81,10 @@
 				  </div>
 				  <div class="card-body">
 				    <p class="card-text"><strong>Comestible</strong>:
-				    	@if($species->comestible_use == null)
-				    	None or unknown.
-				    	@else
 				    	@foreach($species->comestible_use as $use)
 				    		{{ ucfirst($use) }}
 				    		@if(!$loop->last && $loop->count != 1) , @endif
 				    	@endforeach
-				    	@endif
 				    </p>
 				    <p class="card-text"><strong>Medicinal</strong>: {{ $species->medicinal_use ? "Yes" : "No" }}
 				    </p>
@@ -101,44 +99,28 @@
 				  </div>
 				  <div class="card-body">
 				    <p class="card-text"><strong>Flowering period</strong>:
-				    	@if($species->flowering_period == null)
-				    	None or unknown.
-				    	@else
 				    	@foreach($species->flowering_period as $period)
 				    		{{ ucfirst($period) }}
 				    		@if(!$loop->last && $loop->count != 1) , @endif
 				    	@endforeach
-				    	@endif
 				    </p>
 				    <p class="card-text"><strong>Flowering color</strong>:
-				    	@if($species->flowering_color == null)
-				    	None or unknown.
-				    	@else
 				    	@foreach($species->flowering_color as $color)
 				    		{{ ucfirst($color) }}
 				    		@if(!$loop->last && $loop->count != 1) , @endif
 				    	@endforeach
-				    	@endif
 				    </p>
 				    <p class="card-text"><strong>Foliage color</strong>:
-				    	@if($species->foliage_color == null)
-				    	None or unknown.
-				    	@else
 				    	@foreach($species->foliage_color as $color)
 				    		{{ ucfirst($color) }}
 				    		@if(!$loop->last && $loop->count != 1) , @endif
 				    	@endforeach
-				    	@endif
 				    </p>
 				    <p class="card-text"><strong>Post summer appeal</strong>:
-				    	@if($species->post_summer_appeal == null)
-				    	None or unknown.
-				    	@else
 				    	@foreach($species->post_summer_appeal as $season)
 				    		{{ ucfirst($season) }}
 				    		@if(!$loop->last && $loop->count != 1) , @endif
 				    	@endforeach
-				    	@endif
 				    </p>
 				  </div>
 				</div>
@@ -149,44 +131,28 @@
 				  </div>
 				  <div class="card-body">
 				    <p class="card-text"><strong>Growth</strong>:
-				    	@if($species->growth == null)
-				    	None or unknown.
-				    	@else
 				    	@foreach($species->growth as $speed)
 				    		{{ ucfirst($speed) }}
 				    		@if(!$loop->last && $loop->count != 1) , @endif
 				    	@endforeach
-				    	@endif
 				    </p>
 				    <p class="card-text"><strong>Pruning period</strong>:
-				    	@if($species->pruning_period == null)
-				    	None or unknown.
-				    	@else
 				    	@foreach($species->pruning_period as $period)
 				    		{{ ucfirst($period) }}
 				    		@if(!$loop->last && $loop->count != 1) , @endif
 				    	@endforeach
-				    	@endif
 				    </p>
 				    <p class="card-text"><strong>Multiplication</strong>:
-				    	@if($species->multiplication == null)
-				    	None or unknown.
-				    	@else
 				    	@foreach($species->multiplication as $method)
 				    		{{ ucfirst($method) }}
 				    		@if(!$loop->last && $loop->count != 1) , @endif
 				    	@endforeach
-				    	@endif
 				    </p>
 				    <p class="card-text"><strong>Disadvantages</strong>:
-				    	@if($species->disadvantages == null)
-				    	None or unknown.
-				    	@else
 				    	@foreach($species->disadvantages as $disadvantage)
 				    		{{ ucfirst($disadvantage) }}
 				    		@if(!$loop->last && $loop->count != 1) , @endif
 				    	@endforeach
-				    	@endif
 				    </p>
 				  </div>
 				</div>
