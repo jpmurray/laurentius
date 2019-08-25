@@ -37,9 +37,9 @@
 				    Tolerance / Needs
 				  </div>
 				  <div class="card-body">
-				    <p class="card-text"><strong>Hardiness Zone (CA)</strong>: {{ $species->hardiness_ca }}</p>
+				    <p class="card-text"><strong>Hardiness Zone (CA)</strong>: {{ ucfirst($species->hardiness_ca) }}</p>
 				    <p class="card-text"><strong>Sun</strong>: {!! $species->sun_icon !!}</p>
-				    <p class="card-text"><strong>Water</strong>: {{ $species->water }}/5</p>
+				    <p class="card-text"><strong>Water</strong>: {{ $species->water_icon }}<br><span class="text-muted">1 is low, 5 is high.</span></p>
 				    <p class="card-text"><strong>PH (min / max)</strong>: {{ $species->ph_min }} / {{ $species->ph_max }}</p>
 				    <p class="card-text"><strong>Soil</strong>: {!! $species->soil_icon !!}</p>
 				  </div>
@@ -191,62 +191,34 @@
 			  <h5 class="card-header">Functions</h5>
 			  <div class="card-body">
 			    <p class="card-text"><strong>Nitrogen fixer</strong>:
-			    	@if($species->nitrogen_fixer == null)
-			    	None or unknown.
-			    	@else
 			    	{{ $species->nitrogen_fixer ? "Yes" : "No" }}
-			    	@endif
 			    </p>
 			    <p class="card-text"><strong>Nutrients accumulator</strong>:
-			    	@if($species->nutrient_accumulator == null)
-			    	None or unknown.
-			    	@else
 			    	{{ $species->nutrient_accumulator ? "Yes" : "No" }}
-			    	@endif
 			    </p>
 			    <p class="card-text"><strong>Ground cover</strong>:
-			    	@if($species->ground_cover == null)
-			    	None or unknown.
-			    	@else
 			    	{{ $species->ground_cover ? "Yes" : "No" }}
-			    	@endif
 			    </p>
 			    <p class="card-text"><strong>Hedge</strong>:
-			    	@if($species->hedge == null)
-			    	None or unknown.
-			    	@else
 			    	{{ $species->hedge ? "Yes" : "No" }}
-			    	@endif
 			    </p>
 			    <p class="card-text"><strong>Wildlife use</strong>:
-			    	@if($species->wildlife_use == null)
-			    	None or unknown.
-			    	@else
 			    	@foreach($species->wildlife_use as $use)
 			    		{{ ucfirst($use) }}
 			    		@if(!$loop->last && $loop->count != 1) , @endif
 			    	@endforeach
-			    	@endif
 			    </p>
 			    <p class="card-text"><strong>Ecological use</strong>:
-			    	@if($species->ecological_use == null)
-			    	None or unknown.
-			    	@else
 			    	@foreach($species->ecological_use as $use)
 			    		{{ ucfirst($use) }}
 			    		@if(!$loop->last && $loop->count != 1) , @endif
 			    	@endforeach
-			    	@endif
 			    </p>
 			    <p class="card-text"><strong>Pollinating type</strong>:
-			    	@if($species->pollinating_type == null)
-			    	None or unknown.
-			    	@else
 			    	@foreach($species->pollinating_type as $type)
 			    		{{ ucfirst($type) }}
 			    		@if(!$loop->last && $loop->count != 1) , @endif
 			    	@endforeach
-			    	@endif
 			    </p>
 			  </div>
 			</div>

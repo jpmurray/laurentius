@@ -8,16 +8,20 @@ trait Icons
     {
         $result = "";
         collect($this->sun)->each(function ($item) use (&$result) {
+            if ($item == "unknown") {
+                $result .= ' <i class="far fa-question-circle"></i>';
+            }
+
             if ($item == "full") {
-                $result .= ' <i style="font-size: 2em;" class="fas fa-sun"></i>';
+                $result .= ' <i class="fas fa-sun"></i>';
             }
 
             if ($item == "partial") {
-                $result .= ' <i style="font-size: 2em;" class="fas fa-cloud-sun"></i>';
+                $result .= ' <i class="fas fa-cloud-sun"></i>';
             }
 
             if ($item == "shade") {
-                $result .= ' <i style="font-size: 2em;" class="fas fa-cloud"></i>';
+                $result .= ' <i class="fas fa-cloud"></i>';
             }
         });
 
@@ -28,19 +32,38 @@ trait Icons
     {
         $result = "";
         collect($this->soil)->each(function ($item) use (&$result) {
+            if ($item == "unknown") {
+                $result .= ' <i class="far fa-question-circle"></i>';
+            }
+            
             if ($item == "light") {
-                $result .= ' <i style="font-size: 2em;" class="fas fa-battery-empty"></i>';
+                $result .= ' <i class="fas fa-battery-empty"></i>';
             }
 
             if ($item == "mid") {
-                $result .= ' <i style="font-size: 2em;" class="fas fa-battery-half"></i>';
+                $result .= ' <i class="fas fa-battery-half"></i>';
             }
 
             if ($item == "heavy") {
-                $result .= ' <i style="font-size: 2em;" class="fas fa-battery-full"></i>';
+                $result .= ' <i class="fas fa-battery-full"></i>';
             }
         });
 
         return $result;
+    }
+
+    public function getWaterIconAttribute()
+    {
+        if ($this->water == "unknown") {
+            return '<i class="far fa-question-circle"></i>';
+        }
+
+        $icons="";
+
+        for ($i=0; $i < $this->water; $i++) {
+            $icons .= "💧";
+        }
+
+        return $icons;
     }
 }
