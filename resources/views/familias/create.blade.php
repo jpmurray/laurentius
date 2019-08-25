@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Create a new familia</div>
+                <div class="card-header">{!! __('Create a new <em>familia</em>') !!}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('familias.store') }}">

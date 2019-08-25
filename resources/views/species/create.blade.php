@@ -6,15 +6,15 @@
         <div class="col-md-12">
             <div class="card text-white bg-info mb-3">
                 <div class="card-body">
-                    <p>Here you can add a new <em>species</em> to the database.</p>
-                    <span class="font-weight-bold">Mandatory fields are marked with an asterisk (*). In free typing fields, unknown informations can be left empty, unless mandatory.</span>
+                    <p>{!! __('Here you can add a new <em>species</em> to the database.') !!}</p>
+                    <span class="font-weight-bold">{{ __('Mandatory fields are marked with an asterisk (*). In free typing fields, unknown informations can be left empty, unless mandatory.') }}</span>
                 </div>
             </div>
             
             <form method="POST" action="{{ route('species.store') }}">
             @csrf
                 <div class="card mb-3">
-                    <div class="card-header">Taxonomy</div>
+                    <div class="card-header">{{ __('Taxonomy') }}</div>
 
                     <div class="card-body">
                         <div class="form-group row">
@@ -82,7 +82,7 @@
                 <div class="card-deck mb-3">
                     <div class="card">
                         <div class="card-header">
-                            Tolerance / Needs
+                            {{ __('Tolerance / Needs') }}
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
@@ -157,7 +157,7 @@
                                         </div>
                                     @endforeach
 
-                                    <span class="form-text text-muted">from Low (1) to High (5)</span>
+                                    <span class="form-text text-muted">{{ __('from Low (1) to High (5)') }}</span>
 
                                     @error('water')
                                         <span class="invalid-feedback" role="alert">
@@ -199,7 +199,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            Architecture
+                            {{ __('Architecture') }}
                         </div>
 
                         <div class="card-body">
@@ -246,7 +246,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="maturity_height_meters" class="col-md-3 col-form-label text-md-right">{{ __('Hight, maturity (meters)') }}</label>
+                                <label for="maturity_height_meters" class="col-md-3 col-form-label text-md-right">{{ __('Height, maturity (meters)') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="maturity_height_meters" type="text" class="form-control @error('maturity_height_meters') is-invalid @enderror" name="maturity_height_meters" value="{{ old('maturity_height_meters') }}" autocomplete="maturity_height_meters" autofocus>
@@ -279,7 +279,7 @@
                 <div class="card-deck mb-3">
                     <div class="card">
                         <div class="card-header">
-                            Usage
+                            {{ __('Usage') }}
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
@@ -288,11 +288,11 @@
                                 <div class="col-md-6">
                                     <div class="form-check form-check-inline">
                                       <input class="form-check-input" type="radio" name="medicinal_use" id="medicinal_use_yes" value="1">
-                                      <label class="form-check-label" for="medicinal_use_yes">Yes</label>
+                                      <label class="form-check-label" for="medicinal_use_yes">{{ __('Yes') }}</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                       <input class="form-check-input" type="radio" name="medicinal_use" id="medicinal_use_no" value="0" CHECKED>
-                                      <label class="form-check-label" for="nitrogen_fixer_no">No</label>
+                                      <label class="form-check-label" for="nitrogen_fixer_no">{{ __('No') }}</label>
                                     </div>
 
                                     @error('medicinal_use')
@@ -328,7 +328,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            Functions
+                            {{ __('Functions') }}
                         </div>
 
                         <div class="card-body">
@@ -338,11 +338,11 @@
                                 <div class="col-md-6">
                                     <div class="form-check form-check-inline">
                                       <input class="form-check-input" type="radio" name="nitrogen_fixer" id="nitrogen_fixer_yes" value="1">
-                                      <label class="form-check-label" for="nitrogen_fixer_yes">Yes</label>
+                                      <label class="form-check-label" for="nitrogen_fixer_yes">{{ __('Yes') }}</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                       <input class="form-check-input" type="radio" name="nitrogen_fixer" id="nitrogen_fixer_no" value="0" CHECKED>
-                                      <label class="form-check-label" for="nitrogen_fixer_no">No</label>
+                                      <label class="form-check-label" for="nitrogen_fixer_no">{{ __('No') }}</label>
                                     </div>
 
                                     @error('nitrogen_fixer')
@@ -359,11 +359,11 @@
                                 <div class="col-md-6">
                                     <div class="form-check form-check-inline">
                                       <input class="form-check-input" type="radio" name="nutrient_accumulator" id="nutrient_accumulator_yes" value="1">
-                                      <label class="form-check-label" for="nutrient_accumulator_yes">Yes</label>
+                                      <label class="form-check-label" for="nutrient_accumulator_yes">{{ __('Yes') }}</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                       <input class="form-check-input" type="radio" name="nutrient_accumulator" id="nutrient_accumulator_no" value="0" CHECKED>
-                                      <label class="form-check-label" for="nutrient_accumulator_no">No</label>
+                                      <label class="form-check-label" for="nutrient_accumulator_no">{{ __('No') }}</label>
                                     </div>
 
                                     @error('nutrient_accumulator')
@@ -380,11 +380,11 @@
                                 <div class="col-md-6">
                                     <div class="form-check form-check-inline">
                                       <input class="form-check-input" type="radio" name="ground_cover" id="ground_cover_yes" value="1">
-                                      <label class="form-check-label" for="ground_cover_yes">Yes</label>
+                                      <label class="form-check-label" for="ground_cover_yes">{{ __('Yes') }}</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                       <input class="form-check-input" type="radio" name="ground_cover" id="ground_cover_no" value="0" CHECKED>
-                                      <label class="form-check-label" for="ground_cover_no">No</label>
+                                      <label class="form-check-label" for="ground_cover_no">{{ __('No') }}</label>
                                     </div>
 
                                     @error('ground_cover')
@@ -401,11 +401,11 @@
                                 <div class="col-md-6">
                                     <div class="form-check form-check-inline">
                                       <input class="form-check-input" type="radio" name="hedge" id="hedge_yes" value="1">
-                                      <label class="form-check-label" for="hedge_yes">Yes</label>
+                                      <label class="form-check-label" for="hedge_yes">{{ __('Yes') }}</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                       <input class="form-check-input" type="radio" name="hedge" id="hedge_no" value="0" CHECKED>
-                                      <label class="form-check-label" for="hedge_no">No</label>
+                                      <label class="form-check-label" for="hedge_no">{{ __('No') }}</label>
                                     </div>
 
                                     @error('hedge')
@@ -485,7 +485,7 @@
                 <div class="card-deck mb-3">
                     <div class="card">
                         <div class="card-header">
-                            Ornemental
+                            {{ __('Ornemental') }}
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
@@ -576,7 +576,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            Horticulture
+                            {{ __('Horticulture') }}
                         </div>
 
                         <div class="card-body">
@@ -668,7 +668,7 @@
                 </div>
 
                 <div class="card mb-3">
-                    <div class="card-header">Others</div>
+                    <div class="card-header">{{ __('Others') }}</div>
                     <div class="card-body">
                         <div class="form-group row">
                             <label for="interesting_cultivar" class="col-md-3 col-form-label text-md-right">{{ __('Interesting cultivars') }}</label>
@@ -676,7 +676,7 @@
                             <div class="col-md-6">
                                 <input id="interesting_cultivar" type="text" class="form-control @error('interesting_cultivar') is-invalid @enderror" name="interesting_cultivar" value="{{ old('interesting_cultivar') }}" autofocus>
 
-                                <span class="form-text">Separate each cultivar with comas,<br>ex: <code>a cool cultivar,cultivar1,another cultivar</code></span>
+                                <span class="form-text">{{ __('Separate each cultivar with comas,<br>ex: <code>a cool cultivar,cultivar1,another cultivar</code>') }}</span>
 
                                 @error('interesting_cultivar')
                                     <span class="invalid-feedback" role="alert">

@@ -11,11 +11,11 @@
             @endif
             
             <div class="card">
-                <div class="card-header">Edit regnum {{ $regnum->name }}</div>
+                <div class="card-header">{{ __('Edit :name', ['name' => $regnum->name]) }}</div>
 
                 <div class="card-body">
                     <div class="alert alert-warning" role="alert">
-                        <strong>Heads up!</strong> Regnums (kingdoms) are pretty standardized. Do you really want to edit them?
+                        {!! __('<strong>Heads up!</strong> <em>Regnums</em> (kingdoms) are pretty standardized. Do you really want to edit them?') !!}
                     </div>
 
                     <form method="POST" action="{{ route('regnums.update', $regnum) }}">

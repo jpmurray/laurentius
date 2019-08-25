@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Create a new genus</div>
+                <div class="card-header">{!! __('Create a new <em>genus</em>') !!}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('genera.store') }}">

@@ -11,14 +11,14 @@
             @endif
 
             <div class="card">
-                <div class="card-header">Familias <a href="{{ route('familias.create') }}" class="btn btn-link btn-sm">Add new</a></div>
+                <div class="card-header">{{ __('Familias') }} <a href="{{ route('familias.create') }}" class="btn btn-link btn-sm">{{ __('Add new') }}</a></div>
 
                 <div class="card-body p-0">
                     <table class="table">
 					  <thead>
 					    <tr>
-					      <th scope="col">Name</th>
-					      <th scope="col">Actions</th>
+					      <th scope="col">{{ __('Name') }}</th>
+					      <th scope="col">{{ __('Actions') }}</th>
 					    </tr>
 					  </thead>
 					  <tbody>
@@ -26,10 +26,10 @@
 					    <tr>
 					      <th scope="row">{{ $familia->name }}</th>
 					      <td>
-					      	<a href="{{ route('familias.edit', $familia) }}" class="btn btn-link btn-sm">Edit</a>
+					      	<a href="{{ route('familias.edit', $familia) }}" class="btn btn-link btn-sm">{{ __('Edit') }}</a>
 
 					      	<a href="{{ route('familias.destroy', $familia) }}" class="btn btn-link btn-sm" onclick="event.preventDefault();
-                                 document.getElementById('delete-familia-{{ $familia->id }}').submit();">Delete</a>
+                                 document.getElementById('delete-familia-{{ $familia->id }}').submit();">{{ __('Delete') }}</a>
 
 					      	<form id="delete-familia-{{ $familia->id }}" action="{{ route('familias.destroy', $familia) }}" method="POST" style="display: none;">
 			                    @csrf

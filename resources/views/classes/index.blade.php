@@ -11,14 +11,14 @@
             @endif
 
             <div class="card">
-                <div class="card-header">Classes <a href="{{ route('classes.create') }}" class="btn btn-link btn-sm">Add new</a></div>
+                <div class="card-header">{{ __('Classes') }} <a href="{{ route('classes.create') }}" class="btn btn-link btn-sm">{{ __('Add new') }}</a></div>
 
                 <div class="card-body p-0">
                     <table class="table">
 					  <thead>
 					    <tr>
-					      <th scope="col">Name</th>
-					      <th scope="col">Actions</th>
+					      <th scope="col">{{ __('Name') }}</th>
+					      <th scope="col">{{ __('Actions') }}</th>
 					    </tr>
 					  </thead>
 					  <tbody>
@@ -26,10 +26,10 @@
 					    <tr>
 					      <th scope="row">{{ $classis->name }}</th>
 					      <td>
-					      	<a href="{{ route('classes.edit', $classis) }}" class="btn btn-link btn-sm">Edit</a>
+					      	<a href="{{ route('classes.edit', $classis) }}" class="btn btn-link btn-sm">{{ __('Edit') }}</a>
 
 					      	<a href="{{ route('classes.destroy', $classis) }}" class="btn btn-link btn-sm" onclick="event.preventDefault();
-                                 document.getElementById('delete-classes-{{ $classis->id }}').submit();">Delete</a>
+                                 document.getElementById('delete-classes-{{ $classis->id }}').submit();">{{ __('Delete') }}</a>
 
 					      	<form id="delete-classes-{{ $classis->id }}" action="{{ route('classes.destroy', $classis) }}" method="POST" style="display: none;">
 			                    @csrf

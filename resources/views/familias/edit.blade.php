@@ -11,7 +11,7 @@
             @endif
             
             <div class="card">
-                <div class="card-header">Edit familia {{ $familia->name }}</div>
+                <div class="card-header">{{ __('Edit :name', ['name' => $familia->name]) }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('familias.update', $familia) }}">
