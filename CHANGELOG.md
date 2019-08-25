@@ -1,8 +1,12 @@
 # Changelog
 
+# NEXT
+
+- Can add additional informations to _species_: uses, ornemental, horticulture.
+
 # 0.2.0 - Pre-release (2019-08-24)
 
-- Can add additional informations to _species_: architecture, functions, uses, ornemental.
+- Can add additional informations to _species_: architecture, functions.
 
 # 0.1.0 - Pre-release (2019-08-24)
 

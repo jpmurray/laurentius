@@ -552,6 +552,84 @@
                         </div>
                     </div>
 
+                    <h5 class="card-title text-md-center">Horticulture</h5>
+
+                    <div class="form-group row">
+                        <label for="growth" class="col-md-3 col-form-label text-md-right">{{ __('Growth') }}</label>
+
+                        <div class="col-md-6">
+                            @foreach(App\Species::GROWTH_SPEEDS as $key => $speed)
+                            <div class="custom-control custom-switch">
+                              <input type="checkbox" class="custom-control-input" id="growth_{{ $speed }}" name="growth[]" value="{{ $speed }}" @if(!is_null($species->growth) && in_array($speed, $species->growth)) CHECKED @endif>
+                              <label class="custom-control-label" for="growth_{{ $speed }}">{{ ucfirst($speed) }}</label>
+                            </div>
+                            @endforeach
+
+                            @error('flowering_period')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="pruning_period" class="col-md-3 col-form-label text-md-right">{{ __('Pruning period') }}</label>
+
+                        <div class="col-md-6">
+                            @foreach(App\Species::PRUNING_PERIODS as $key => $period)
+                            <div class="custom-control custom-switch">
+                              <input type="checkbox" class="custom-control-input" id="pruning_period_{{ $period }}" name="pruning_period[]" value="{{ $period }}" @if(!is_null($species->pruning_period) && in_array($period, $species->pruning_period)) CHECKED @endif>
+                              <label class="custom-control-label" for="pruning_period_{{ $period }}">{{ ucfirst($period) }}</label>
+                            </div>
+                            @endforeach
+
+                            @error('pruning_period')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="multiplication" class="col-md-3 col-form-label text-md-right">{{ __('Multiplication') }}</label>
+
+                        <div class="col-md-6">
+                            @foreach(App\Species::MULTIPLICATIONS as $key => $method)
+                            <div class="custom-control custom-switch">
+                              <input type="checkbox" class="custom-control-input" id="multiplication_{{ $method }}" name="multiplication[]" value="{{ $method }}" @if(!is_null($species->multiplication) && in_array($method, $species->multiplication)) CHECKED @endif>
+                              <label class="custom-control-label" for="multiplication_{{ $method }}">{{ ucfirst($method) }}</label>
+                            </div>
+                            @endforeach
+
+                            @error('multiplication')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="disadvantages" class="col-md-3 col-form-label text-md-right">{{ __('Disadvantages') }}</label>
+
+                        <div class="col-md-6">
+                            @foreach(App\Species::DISADVANTAGES as $key => $reason)
+                            <div class="custom-control custom-switch">
+                              <input type="checkbox" class="custom-control-input" id="disadvantages_{{ $reason }}" name="disadvantages[]" value="{{ $reason }}" @if(!is_null($species->disadvantages) && in_array($reason, $species->disadvantages)) CHECKED @endif>
+                              <label class="custom-control-label" for="disadvantages_{{ $reason }}">{{ ucfirst($reason) }}</label>
+                            </div>
+                            @endforeach
+
+                            @error('disadvantages')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
                     <div class="card-footer">
                         <button type="submit" class="btn btn-sm btn-primary">
                             {{ __('Update') }}
