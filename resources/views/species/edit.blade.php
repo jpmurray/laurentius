@@ -668,12 +668,6 @@
                                     @enderror
                                 </div>
                             </div>
-
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-sm btn-primary">
-                                    {{ __('Update') }}
-                                </button>
-                            </div>
                         </div>
                     </div>
                 </div>
