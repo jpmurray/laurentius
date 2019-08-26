@@ -39,7 +39,9 @@ class SpeciesController extends Controller
     public function store(StoreSpecies $request)
     {
         $validatedData = $request->validated();
+
         $validatedData['interesting_cultivar'] = !isset($validatedData['interesting_cultivar']) ? null : explode(',', $validatedData['interesting_cultivar']);
+
         $genus = Genus::find($validatedData['genus']);
         $species = $genus->species()->create($validatedData);
         $species->suppliers()->sync($validatedData['suppliers']);
@@ -78,12 +80,12 @@ class SpeciesController extends Controller
      */
     public function update(UpdateSpecies $request, Species $species)
     {
-        $validatedData = $request->validated();
-        dd($validatedData);
 
+        $validatedData = $request->validated();
+        
         $validatedData['sun'] = !isset($validatedData['sun']) ? null : $validatedData['sun'];
         $validatedData['soil'] = !isset($validatedData['soil']) ? null : $validatedData['soil'];
-        $validatedData['water'] = !isset($validatedData['water']) ? null : $validatedData['water'];
+        $validatedData['water'] = !isset($validatedData['water']) ? "unknown" : $validatedData['water'];
         $validatedData['shape'] = !isset($validatedData['shape']) ? null : $validatedData['shape'];
         $validatedData['root'] = !isset($validatedData['root']) ? null : $validatedData['root'];
         $validatedData['wildlife_use'] = !isset($validatedData['wildlife_use']) ? null : $validatedData['wildlife_use'];
@@ -91,6 +93,7 @@ class SpeciesController extends Controller
         $validatedData['pollinating_type'] = !isset($validatedData['pollinating_type']) ? null : $validatedData['pollinating_type'];
         $validatedData['comestible_use'] = !isset($validatedData['comestible_use']) ? null : $validatedData['comestible_use'];
         $validatedData['interesting_cultivar'] = !isset($validatedData['interesting_cultivar']) ? null : explode(',', $validatedData['interesting_cultivar']);
+        $validatedData['suppliers'] = !isset($validatedData['suppliers']) ? [] : $validatedData['suppliers'];
         
         $species->update($validatedData);
         $species->suppliers()->sync($validatedData['suppliers']);
