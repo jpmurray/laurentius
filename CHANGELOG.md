@@ -1,6 +1,7 @@
 # Changelog
 
-## Next
+## 1.0.1
+- Added controller check for auth in controller.
 
 ## 1.0.0 - (2019-08-25)
 - Traduction mechanism in place.
