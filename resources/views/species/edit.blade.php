@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-11">
-                            Here you can edit known informations about {{ $species->binominal_name }}. <strong>Mandatory fields are marked with an asterisk (*).</strong>
+                            {!! __("Here you can edit known informations about :species. <strong>Mandatory fields are marked with an asterisk (*).", ['species' => $species->binominal_name]) !!}</strong>
                         </div>
                         <div class="col-md-1">
                             <a class="text-white" href="{{ route('species.show', $species) }}" target="_blank"><i style="font-size: 1.5em;" class="far fa-eye"></i></a>
