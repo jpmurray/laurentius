@@ -188,5 +188,7 @@
     "dispersive": "dispersive",
     "allergen": "allergen",
     "poison": "poison",
-    "thorny": "thorny"
+    "thorny": "thorny",
+    "Here you can edit known informations about :species. <strong>Mandatory fields are marked with an asterisk (*).": "",
+    "Unknown": ""
 }
