@@ -3,28 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Genus;
-use App\Rules\ComestibleUse;
-use App\Rules\Disadvantages;
-use App\Rules\EcologicalUse;
-use App\Rules\FloweringColor;
-use App\Rules\FloweringPeriod;
-use App\Rules\FoliageColor;
-use App\Rules\Growth;
-use App\Rules\HardinessCa;
-use App\Rules\Multiplication;
-use App\Rules\PollinatingType;
-use App\Rules\PostSummerAppeal;
-use App\Rules\PruningPeriod;
-use App\Rules\Root;
-use App\Rules\Shape;
-use App\Rules\Soil;
-use App\Rules\Sun;
-use App\Rules\WildlifeUse;
+use App\Http\Requests\StoreSpecies;
+use App\Http\Requests\UpdateSpecies;
 use App\Species;
 use Illuminate\Http\Request;
 
 class SpeciesController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->except('show');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -51,44 +46,9 @@ class SpeciesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSpecies $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|unique:species',
-            'name_fr' => 'required',
-            'name_en' => 'required',
-            'genus' => 'required|integer',
-            'hardiness_ca' => ['nullable', new HardinessCa],
-            'sun' => ['nullable', new Sun],
-            'soil' => ['nullable', new Soil],
-            'water' => 'nullable',
-            'ph_min' => 'numeric|nullable',
-            'ph_max' => 'numeric|nullable',
-            'shape' => ['nullable', new Shape],
-            'root' => ['nullable', new Root],
-            'maturity_width_meters' => 'numeric|nullable',
-            'maturity_height_meters' => 'numeric|nullable',
-            'nitrogen_fixer' => 'nullable|boolean',
-            'nutrient_accumulator' => 'nullable|boolean',
-            'hedge' => 'nullable|boolean',
-            'ground_cover' => 'nullable|boolean',
-            'wildlife_use' => ['nullable', new WildlifeUse],
-            'ecological_use' => ['nullable', new EcologicalUse],
-            'pollinating_type' => ['nullable', new PollinatingType],
-            'medicinal_use' => 'nullable|boolean',
-            'comestible_use' => ['nullable', new ComestibleUse],
-            'flowering_period' => ['nullable', new FloweringPeriod],
-            'flowering_color' => ['nullable', new FloweringColor],
-            'foliage_color' => ['nullable', new FoliageColor],
-            'post_summer_appeal' => ['nullable', new PostSummerAppeal],
-            'growth' => ['nullable', new Growth],
-            'pruning_period' => ['nullable', new PruningPeriod],
-            'multiplication' => ['nullable', new Multiplication],
-            'disadvantages' => ['nullable', new Disadvantages],
-            'interesting_cultivar' => 'nullable',
-            'maintainers_note' => 'nullable',
-            'suppliers' => 'nullable',
-        ]);
+        $validatedData = $request->validated();
 
         $validatedData['interesting_cultivar'] = !isset($validatedData['interesting_cultivar']) ? null : explode(',', $validatedData['interesting_cultivar']);
 
@@ -128,41 +88,14 @@ class SpeciesController extends Controller
      * @param  \App\Species  $species
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Species $species)
+    public function update(UpdateSpecies $request, Species $species)
     {
 
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'name_fr' => 'required',
-            'name_en' => 'required',
-            'genus' => 'required|integer',
-            'hardiness_ca' => ['nullable', new HardinessCa],
-            'sun' => ['nullable', new Sun],
-            'soil' => ['nullable', new Soil],
-            'water' => 'nullable',
-            'ph_min' => 'numeric|nullable',
-            'ph_max' => 'numeric|nullable',
-            'shape' => ['nullable', new Shape],
-            'root' => ['nullable', new Root],
-            'maturity_width_meters' => 'numeric|nullable',
-            'maturity_height_meters' => 'numeric|nullable',
-            'nitrogen_fixer' => 'nullable|boolean',
-            'nutrient_accumulator' => 'nullable|boolean',
-            'hedge' => 'nullable|boolean',
-            'ground_cover' => 'nullable|boolean',
-            'wildlife_use' => ['nullable', new WildlifeUse],
-            'ecological_use' => ['nullable', new EcologicalUse],
-            'pollinating_type' => ['nullable', new PollinatingType],
-            'medicinal_use' => 'nullable|boolean',
-            'comestible_use' => ['nullable', new ComestibleUse],
-            'interesting_cultivar' => 'nullable',
-            'maintainers_note' => 'nullable',
-            'suppliers' => 'nullable',
-        ]);
-
+        $validatedData = $request->validated();
+        
         $validatedData['sun'] = !isset($validatedData['sun']) ? null : $validatedData['sun'];
         $validatedData['soil'] = !isset($validatedData['soil']) ? null : $validatedData['soil'];
-        $validatedData['water'] = !isset($validatedData['water']) ? null : $validatedData['water'];
+        $validatedData['water'] = !isset($validatedData['water']) ? "unknown" : $validatedData['water'];
         $validatedData['shape'] = !isset($validatedData['shape']) ? null : $validatedData['shape'];
         $validatedData['root'] = !isset($validatedData['root']) ? null : $validatedData['root'];
         $validatedData['wildlife_use'] = !isset($validatedData['wildlife_use']) ? null : $validatedData['wildlife_use'];
@@ -170,8 +103,8 @@ class SpeciesController extends Controller
         $validatedData['pollinating_type'] = !isset($validatedData['pollinating_type']) ? null : $validatedData['pollinating_type'];
         $validatedData['comestible_use'] = !isset($validatedData['comestible_use']) ? null : $validatedData['comestible_use'];
         $validatedData['interesting_cultivar'] = !isset($validatedData['interesting_cultivar']) ? null : explode(',', $validatedData['interesting_cultivar']);
+        $validatedData['suppliers'] = !isset($validatedData['suppliers']) ? [] : $validatedData['suppliers'];
         
-
         $species->update($validatedData);
         $species->suppliers()->sync($validatedData['suppliers']);
 

@@ -1,5 +1,8 @@
 <!-- Left Side Of Navbar -->
 <ul class="navbar-nav mr-auto">
+    @guest
+    &nbsp;
+    @else
 	<a class="nav-link" href="{{ route("home") }}">{{ __('Dashboard') }}</a>
 	<li class="nav-item dropdown">
         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -29,4 +32,5 @@
     </li>
     <a class="nav-link" href="{{ route("species.index") }}">{{ __('Manage species') }}</a>
     <a class="nav-link" href="{{ route("suppliers.index") }}">{{ __('Manage suppliers') }}</a>
+    @endguest
 </ul>
