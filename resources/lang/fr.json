@@ -190,5 +190,11 @@
     "poison": "poison",
     "thorny": "épineux",
     "Here you can edit known informations about :species. <strong>Mandatory fields are marked with an asterisk (*).": "Vous pouvez modifier ici les informations de :species. Les champs obligatoires sont marqués d'un astérisque (*).",
-    "Unknown": "Inconnu"
+    "Unknown": "Inconnu",
+    "Images": "Images",
+    "Main image": "Image principale",
+    "No images yet": "Aucune image",
+    "We suggest images in oriented in landscape.": "Nous suggérons une image orienté paysage.",
+    "Update images": "Mettre les images à jour",
+    "Adding any files here will replace existing ones.": "En ajourant des fichier ici, vous remplacerez ceux déjà existant."
 }

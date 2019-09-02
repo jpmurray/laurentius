@@ -51,10 +51,12 @@ class SpeciesController extends Controller
         $validatedData = $request->validated();
 
         $validatedData['interesting_cultivar'] = !isset($validatedData['interesting_cultivar']) ? null : explode(',', $validatedData['interesting_cultivar']);
+        $validatedData['suppliers'] = !isset($validatedData['suppliers']) ? null : $validatedData['suppliers'];
 
         $genus = Genus::find($validatedData['genus']);
         $species = $genus->species()->create($validatedData);
         $species->suppliers()->sync($validatedData['suppliers']);
+        $species->addMediaFromRequest('main_image')->toMediaCollection('main');
 
         return redirect()->route('species.index')->with('status', 'Added!');
     }
@@ -107,6 +109,7 @@ class SpeciesController extends Controller
         
         $species->update($validatedData);
         $species->suppliers()->sync($validatedData['suppliers']);
+        $species->addMediaFromRequest('main_image')->toMediaCollection('main');
 
         return redirect()->route('species.edit', $species)->with('status', 'Updated!');
     }

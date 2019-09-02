@@ -75,6 +75,7 @@ class StoreSpecies extends FormRequest
             'interesting_cultivar' => 'nullable',
             'maintainers_note' => 'nullable',
             'suppliers' => 'nullable',
+            'main_image' => 'nullable|image',
         ];
     }
 

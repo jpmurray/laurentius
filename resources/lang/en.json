@@ -190,5 +190,11 @@
     "poison": "poison",
     "thorny": "thorny",
     "Here you can edit known informations about :species. <strong>Mandatory fields are marked with an asterisk (*).": "",
-    "Unknown": ""
+    "Unknown": "",
+    "Images": "",
+    "Main image": "",
+    "No images yet": "",
+    "We suggest images in oriented in landscape.": "",
+    "Update images": "",
+    "Adding any files here will replace existing ones.": ""
 }

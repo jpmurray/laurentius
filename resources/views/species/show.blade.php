@@ -13,7 +13,11 @@
             <div class="card mb-3">
 			  <div class="row no-gutters">
 			    <div class="col-md-4">
-			      <img src="https://placehold.co/600x400" class="card-img" alt="{{ $species->binominal_name }}">
+			    	@if($species->getMedia('main')->count() == 0)
+			    	<img src="https://placehold.co/600x400?text={{ urlencode(__('No images yet')) }}" class="card-img" alt="{{ $species->binominal_name }}">
+			    	@else
+			    	<img src="{{ $species->getMedia('main')->first()->getUrl('thumb') }}" class="card-img" alt="{{ $species->binominal_name }}">
+			    	@endif
 			    </div>
 			    <div class="col-md-8">
 			      <div class="card-body">
@@ -163,36 +167,42 @@
 			  		<h5 class="card-header">{{ __('Functions') }}</h5>
 
 					<div class="card-body">
-						<p class="card-text"><strong>{{ __('Nitrogen fixer') }}</strong>:
-							{{ $species->nitrogen_fixer ? __('Yes') : __('No') }}
-						</p>
-						<p class="card-text"><strong>{{ __('Nutrients accumulator') }}</strong>:
-							{{ $species->nutrient_accumulator ? __('Yes') : __('No') }}
-						</p>
-						<p class="card-text"><strong>{{ __('Ground cover') }}</strong>:
-							{{ $species->ground_cover ? __('Yes') : __('No') }}
-						</p>
-						<p class="card-text"><strong>{{ __('Hedge') }}</strong>:
-							{{ $species->hedge ? __('Yes') : __('No') }}
-						</p>
-						<p class="card-text"><strong>{{ __('Wildlife uses') }}</strong>:
-							@foreach($species->wildlife_use as $use)
-								{{ ucfirst(__($use)) }}
-								@if(!$loop->last && $loop->count != 1) , @endif
-							@endforeach
-						</p>
-						<p class="card-text"><strong>{{ __('Ecological uses') }}</strong>:
-							@foreach($species->ecological_use as $use)
-								{{ ucfirst(__($use)) }}
-								@if(!$loop->last && $loop->count != 1) , @endif
-							@endforeach
-						</p>
-						<p class="card-text"><strong>{{ __('Pollinating type') }}</strong>:
-							@foreach($species->pollinating_type as $type)
-								{{ ucfirst(__($type)) }}
-								@if(!$loop->last && $loop->count != 1) , @endif
-							@endforeach
-						</p>
+						<div class="row">
+							<div class="col">
+								<p class="card-text"><strong>{{ __('Nitrogen fixer') }}</strong>:
+									{{ $species->nitrogen_fixer ? __('Yes') : __('No') }}
+								</p>
+								<p class="card-text"><strong>{{ __('Nutrients accumulator') }}</strong>:
+									{{ $species->nutrient_accumulator ? __('Yes') : __('No') }}
+								</p>
+								<p class="card-text"><strong>{{ __('Ground cover') }}</strong>:
+									{{ $species->ground_cover ? __('Yes') : __('No') }}
+								</p>
+								<p class="card-text"><strong>{{ __('Hedge') }}</strong>:
+									{{ $species->hedge ? __('Yes') : __('No') }}
+								</p>
+							</div>
+							<div class="col">
+							<p class="card-text"><strong>{{ __('Wildlife uses') }}</strong>:
+								@foreach($species->wildlife_use as $use)
+									{{ ucfirst(__($use)) }}
+									@if(!$loop->last && $loop->count != 1) , @endif
+								@endforeach
+							</p>
+							<p class="card-text"><strong>{{ __('Ecological uses') }}</strong>:
+								@foreach($species->ecological_use as $use)
+									{{ ucfirst(__($use)) }}
+									@if(!$loop->last && $loop->count != 1) , @endif
+								@endforeach
+							</p>
+							<p class="card-text"><strong>{{ __('Pollinating type') }}</strong>:
+								@foreach($species->pollinating_type as $type)
+									{{ ucfirst(__($type)) }}
+									@if(!$loop->last && $loop->count != 1) , @endif
+								@endforeach
+							</p>
+						</div>
+						</div>
 					</div>
 				</div>
 

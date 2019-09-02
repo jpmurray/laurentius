@@ -6,6 +6,7 @@ use App\Traits\Species\Icons;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\Models\Media;
 
 class Species extends Model implements HasMedia
 {
@@ -71,5 +72,18 @@ class Species extends Model implements HasMedia
     public function getBinominalNameAttribute()
     {
         return $this->genus->name . " " . strtolower($this->name);
+    }
+
+    public function registerMediaCollections()
+    {
+        $this->addMediaCollection('main')->singleFile();
+    }
+
+    public function registerMediaConversions(Media $media = null)
+    {
+        $this->addMediaConversion('thumb')
+              ->width(600)
+              ->height(400)
+              ->performOnCollections('main');
     }
 }
