@@ -2,7 +2,8 @@
 
 ## Next
 - Compacted functions on species' show page.
-- Add images to species from edit page.
+- Add images to species.
+- Fix empty supplier bug on species creation.
 
 ## 1.0.1
 - Added controller check for auth in controller.

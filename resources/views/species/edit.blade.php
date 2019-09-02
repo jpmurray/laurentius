@@ -96,9 +96,12 @@
                     </div>
 
                     <div class="card">
-                        <div class="card-header">{{ __('Images') }}</div>
+                        <div class="card-header">{{ __('Update images') }}</div>
 
                         <div class="card-body">
+                            <div class="alert alert-warning" role="alert">
+                                {{ __("Adding any files here will replace existing ones.") }}
+                            </div>
                             <div class="form-group row">
                                 <label for="main_image" class="col-md-3 col-form-label text-md-right">{{ __('Main image') }}</label>
 
