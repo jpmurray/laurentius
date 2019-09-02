@@ -1,5 +1,8 @@
 # Changelog
 
+## Next
+- Compacted functions on species' show page.
+
 ## 1.0.1
 - Added controller check for auth in controller.
 
