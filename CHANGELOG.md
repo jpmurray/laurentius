@@ -1,11 +1,11 @@
 # Changelog
 
-## Next
+## 1.1.0 (2019-09-02)
 - Compacted functions on species' show page.
 - Add images to species.
 - Fix empty supplier bug on species creation.
 
-## 1.0.1
+## 1.0.1 (2019-08-25)
 - Added controller check for auth in controller.
 
 ## 1.0.0 - (2019-08-25)
