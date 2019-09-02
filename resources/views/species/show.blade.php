@@ -13,7 +13,11 @@
             <div class="card mb-3">
 			  <div class="row no-gutters">
 			    <div class="col-md-4">
-			      <img src="https://placehold.co/600x400" class="card-img" alt="{{ $species->binominal_name }}">
+			    	@if($species->getMedia('main')->count() == 0)
+			    	<img src="https://placehold.co/600x400?text={{ urlencode(__('No images yet')) }}" class="card-img" alt="{{ $species->binominal_name }}">
+			    	@else
+			    	<img src="{{ $species->getMedia('main')->first()->getUrl('thumb') }}" class="card-img" alt="{{ $species->binominal_name }}">
+			    	@endif
 			    </div>
 			    <div class="col-md-8">
 			      <div class="card-body">

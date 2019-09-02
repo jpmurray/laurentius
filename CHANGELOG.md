@@ -2,6 +2,7 @@
 
 ## Next
 - Compacted functions on species' show page.
+- Add images to species from edit page.
 
 ## 1.0.1
 - Added controller check for auth in controller.

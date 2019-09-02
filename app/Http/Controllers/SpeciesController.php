@@ -107,6 +107,7 @@ class SpeciesController extends Controller
         
         $species->update($validatedData);
         $species->suppliers()->sync($validatedData['suppliers']);
+        $species->addMediaFromRequest('main_image')->toMediaCollection('main');
 
         return redirect()->route('species.edit', $species)->with('status', 'Updated!');
     }
