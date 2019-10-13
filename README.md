@@ -16,6 +16,6 @@ sudo npm install -g svgo
 sudo apt-get install gifsicle
 ```
 
-Image optimization will require a queue also.
+Image optimization will require a queue. Also don't forget to run `artisan storage:link` on first deploy.
 
 Better instructions to follow.
