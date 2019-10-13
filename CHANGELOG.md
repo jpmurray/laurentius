@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+- Upgraded packages.
+- Defaults to french locale.
+
 ## 1.1.0 (2019-09-02)
 - Compacted functions on species' show page.
 - Add images to species.
